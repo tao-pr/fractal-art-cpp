@@ -17,7 +17,6 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(glfw3 REQUIRED IMPORTED_TARGET glfw3)
 pkg_check_modules(tbb REQUIRED IMPORTED_TARGET tbb)
 
-# taotodo compiler params
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 

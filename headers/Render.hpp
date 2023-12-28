@@ -41,8 +41,9 @@ namespace Render
       const Fractal::Fractal* fractal;
       Complex z;
       int iter;
+      unsigned char* pixels;
 
-      RenderTask(const Fractal::Fractal* fractal, const Complex& z) : fractal(fractal), z(z), iter(0) {};
+      RenderTask(const Fractal::Fractal* fractal, const Complex& z, unsigned char* pixels) : fractal(fractal), z(z), iter(0), pixels(pixels) {};
   };
 
   class Render 
@@ -76,25 +77,27 @@ namespace Render
           for (double i=boundRect.minIm(); i<boundRect.maxIm(); i+=resolution)
           {
             auto z = Complex(r, i);
-            tasks.push_back(RenderTask(&fractal, z));
+            tasks.push_back(RenderTask(&fractal, z, canvas.data()));
 
             // Coordinate for canvas
             int x = floor((r - boundRect.minRe()) / resolution);
             int y = floor((i - boundRect.minIm()) / resolution);
 
-            // Initialise canvas with black pixels
+            // Initialise canvas with white pixels
+            #ifdef __DEBUG
             std::stringstream ss;
             ss << "Initialising pixel (" << x << ", " << y << ") with black." << std::endl;
             std::cout << ss.str();
-            canvas[y * x * 3 + 0] = 0;
-            canvas[y * x * 3 + 1] = 0;
-            canvas[y * x * 3 + 2] = 0;
+            #endif
+            canvas[y * x * 3 + 0] = 255;
+            canvas[y * x * 3 + 1] = 255;
+            canvas[y * x * 3 + 2] = (x % 10) * 10 + 120; // taodebug
           }
 
-        // taotodo: render all in parallel
+        // render all in parallel
         oneapi::tbb::parallel_for_each(tasks.begin(), tasks.end(), Render());
 
-        std::cout << GREEN << "Submitted " << tasks.size() << " parallel render tasks." << RESET << std::endl;
+        std::cout << GREEN << "Finished " << tasks.size() << " parallel render tasks (" << width << "x" << height << ")" << RESET << std::endl;
       }
   };
 
