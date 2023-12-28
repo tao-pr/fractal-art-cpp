@@ -2,7 +2,7 @@
 
 #include "Complex.hpp"
 
-namespace Geometry
+namespace Geometry // taotodo maybe not used
 {
   class ComplexRect
   {
@@ -17,5 +17,9 @@ namespace Geometry
     {
       return (z.r >= r0 && z.r <= r1 && z.i >= i0 && z.i <= i1);
     };
+    double minRe() const { return r0; };
+    double maxRe()  const { return r1; };
+    double minIm()  const { return i0; };
+    double maxIm()  const { return i1; };
   };
 };

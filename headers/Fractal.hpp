@@ -11,17 +11,21 @@ namespace Fractal
   class Fractal
   {
   protected:
-    Geometry::ComplexRect bound;
+    Complex c;
+    double bound;
+    int nMaxIters;
 
   public:
-    Fractal(const Geometry::ComplexRect &bound) : bound(bound){};
+    Fractal(const double &bound, const Complex &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
-    virtual int convergence(Complex& z, int nIter=0) const;
+    virtual int convergence(Complex &z, int nIter = 0) const;
   };
 
   class JuliaSet : public Fractal
   {
-    inline ~JuliaSet() {};
-    inline int convergence(Complex& z, int nIter=0) const { return -1; };
+  public:
+    inline JuliaSet(const double &bound, const Complex &c, const int nMaxIters) : Fractal(bound, c, nMaxIters){};
+    inline ~JuliaSet(){};
+    int convergence(Complex &z, int nIter = 0) const;
   };
 }
