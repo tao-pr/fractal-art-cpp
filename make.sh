@@ -32,5 +32,5 @@ cmake -DCMAKE_C_COMPILER=$(brew --prefix llvm@16)/bin/clang \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_BUILD_RUNTIME=Off \
       -DLLVM_INCLUDE_TESTS=Off \
-      -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wall -g -O1" ..
+      -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wall -g -O1 -framework Cocoa -framework OpenGL -framework IOKit" ..
 make
