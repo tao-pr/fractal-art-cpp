@@ -84,14 +84,9 @@ namespace Render
             int y = floor((i - boundRect.minIm()) / resolution);
 
             // Initialise canvas with white pixels
-            #ifdef __DEBUG
-            std::stringstream ss;
-            ss << "Initialising pixel (" << x << ", " << y << ") with black." << std::endl;
-            std::cout << ss.str();
-            #endif
             canvas[y * x * 3 + 0] = 255;
             canvas[y * x * 3 + 1] = 255;
-            canvas[y * x * 3 + 2] = (x % 10) * 10 + 120; // taodebug
+            canvas[y * x * 3 + 2] = (x > 100 && x < 120) ? 255 : 0;
           }
 
         // render all in parallel

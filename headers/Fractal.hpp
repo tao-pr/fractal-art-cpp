@@ -18,6 +18,8 @@ namespace Fractal
   public:
     Fractal(const double &bound, const Complex &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
+
+    // Supposed to be atomic and thread-safe
     virtual int convergence(Complex &z, int nIter = 0) const;
   };
 

@@ -39,6 +39,7 @@ To get started with Julia Set Render, follow these steps:
 - CMake
 - [LLVM Compiler](https://github.com/llvm/llvm-project/tree/main)
 - [TBB](https://github.com/oneapi-src/oneTBB)
+- [OpenCV4](https://opencv.org/releases/)
 
 For MacOS users, simply run the following
 
@@ -54,8 +55,8 @@ brew install llvm@16
 # Install TBB
 brew install tbb
 
-# Install OpenGL
-brew install glfw
+# Install OpenCV
+brew install opencv
 ```
 
 3. Build the project using clang (LLVM):

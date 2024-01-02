@@ -8,6 +8,3 @@ const std::string GREEN = "\033[0;32m";
 const std::string MAGENTA = "\033[0;35m";
 const std::string RESET = "\033[0m";
 const std::string NL = "\n"; // Use this instead of std::endl to avoid flushing the buffer
-
-const int WINDOW_WIDTH = 1024;
-const int WINDOW_HEIGHT = 1024;

@@ -14,27 +14,30 @@ message(STATUS "Compiler ID: ${CMAKE_CXX_COMPILER_ID}")
 find_package(LLVM REQUIRED CONFIG)
 find_package(PkgConfig REQUIRED)
 
-pkg_check_modules(glfw3 REQUIRED IMPORTED_TARGET glfw3)
-pkg_check_modules(tbb REQUIRED IMPORTED_TARGET tbb)
+pkg_check_modules(TBB REQUIRED IMPORTED_TARGET tbb)
+pkg_check_modules(OPENCV REQUIRED IMPORTED_TARGET opencv4)
 
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_FLAGS "-stdlib=libc++ -Wall -g -O1")
 
 message(STATUS "Found LLVM             : ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Including headers from : ${LLVM_INCLUDE_DIRS}")
 message(STATUS "Linking libraries from : ${LLVM_LIBRARY_DIRS}")
+message(STATUS "Including TBB from     : ${TBB_INCLUDEDIR} (version ${TBB_VERSION})")
+message(STATUS "Including OpenCV from  : ${OPENCV_INCLUDEDIR} (version ${OPENCV_VERSION})")
 
 # Include / Lib dirs
 include_directories(
-  $ENV{LLVM_INCLUDE_DIR} 
-  $ENV{TBB_INCLUDE_DIR}
-  $ENV{GL_INCLUDE_DIR}
+  $ENV{LLVM_INCLUDE_DIRS} 
+  ${TBB_INCLUDEDIR}
+  ${OPENCV_INCLUDEDIR}
   "${CMAKE_CURRENT_SOURCE_DIR}/headers"
 )
 link_directories(
-  $ENV{LLVM_LIB_DIR}
-  $ENV{TBB_LIB_DIR}
-  $ENV{GL_LIB_DIR}
+  $ENV{LLVM_LIBRARY_DIRS}
+  ${TBB_LIBDIR}
+  ${OPENCV_LIBDIR}
 )
 
 # Source files
@@ -54,7 +57,11 @@ set_target_properties(${TARGET_APP} PROPERTIES
 
 # Link with LLVM libraries & other dependencies
 message(STATUS "Linking LLVM libraries: ${llvm_libs}")
-target_link_libraries( ${TARGET_APP} ${llvm_libs} -ltbb -lglfw)
+target_link_libraries(
+  ${TARGET_APP} 
+  ${llvm_libs} 
+  -ltbb 
+  -lopencv_photo -lopencv_imgproc -lopencv_core)
 
 message(STATUS "Build output : ${CMAKE_BINARY_DIR}")
 

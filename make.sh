@@ -11,14 +11,6 @@ export LLVM_LIB_DIR="$(llvm-config --libdir) $(llvm-config --libdir)/c++"
 export LLVM_INCLUDE_DIR=$(llvm-config --includedir)/c++/v1
 export LLVM_ROOT=$(brew --prefix llvm@16) # for cmakelist
 
-# taotodo use CMake's execute_process instead
-
-export TBB_LIB_DIR="$(brew --prefix tbb)/lib"
-export TBB_INCLUDE_DIR="$(brew --prefix tbb)/include"
-
-export GL_LIB_DIR="$(brew --prefix glfw)/lib"
-export GL_INCLUDE_DIR="$(brew --prefix glfw)/include"
-
 # taotodo make this compatible with both arm64 and x86_64
 
 cmake -DCMAKE_C_COMPILER=$(brew --prefix llvm@16)/bin/clang \
@@ -32,5 +24,8 @@ cmake -DCMAKE_C_COMPILER=$(brew --prefix llvm@16)/bin/clang \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_BUILD_RUNTIME=Off \
       -DLLVM_INCLUDE_TESTS=Off \
-      -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wall -g -O1 -framework Cocoa -framework OpenGL -framework IOKit" ..
+      ..
 make
+
+# taotodo:
+# -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wall -g -O1" ..
