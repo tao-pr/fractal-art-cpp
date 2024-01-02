@@ -25,7 +25,10 @@ int main(int argc, char *argv[])
   auto boundRect = Geometry::ComplexRect(-2.0, 2.0, -2.0, 2.0);
   render->render(fractal, boundRect, resolution);
 
+  // Canvas size
   int width = (boundRect.maxRe() - boundRect.minRe()) / resolution;
   int height = (boundRect.maxIm() - boundRect.minIm()) / resolution;
+
+  // Window size
 
 }

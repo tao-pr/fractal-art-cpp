@@ -13,9 +13,9 @@ namespace Geometry // taotodo maybe not used
 
   public:
     ComplexRect(const double &r0, const double &r1, const double &i0, const double &i1) : r0(r0), r1(r1), i0(i0), i1(i1){};
-    bool isInside(const Complex &z) const
+    bool isInside(const Z::Z &z) const
     {
-      return (z.r >= r0 && z.r <= r1 && z.i >= i0 && z.i <= i1);
+      return (z.re >= r0 && z.re <= r1 && z.im >= i0 && z.im <= i1);
     };
     double minRe() const { return r0; };
     double maxRe()  const { return r1; };

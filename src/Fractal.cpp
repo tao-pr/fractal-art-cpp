@@ -3,15 +3,15 @@
 namespace Fractal
 {
   Fractal::~Fractal() {};
-  int Fractal::convergence(Complex &z, int nIter) const
+  int Fractal::convergence(Z::Z &z, int nIter) const
   {
     return -1;
   }
 
-  int JuliaSet::convergence(Complex &z, int nIter) const
+  int JuliaSet::convergence(Z::Z &z, int nIter) const
   {
-    Complex z_ = z.square() + this->c;
-    if (z_.l2norm() <= this->bound)
+    Complex z_ = Z::sqr(z) + this->c;
+    if (Z::mag(z_) <= this->bound)
     {
       if (nIter + 1 < this->nMaxIters)
         return convergence(z_, nIter+1);

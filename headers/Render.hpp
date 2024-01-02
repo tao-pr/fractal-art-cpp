@@ -39,11 +39,11 @@ namespace Render
   {
     public:
       const Fractal::Fractal* fractal;
-      Complex z;
+      Z::Z z;
       int iter;
       unsigned char* pixels;
 
-      RenderTask(const Fractal::Fractal* fractal, const Complex& z, unsigned char* pixels) : fractal(fractal), z(z), iter(0), pixels(pixels) {};
+      RenderTask(const Fractal::Fractal* fractal, const Z::Z& z, unsigned char* pixels) : fractal(fractal), z(z), iter(0), pixels(pixels) {};
   };
 
   class Render 
@@ -53,10 +53,11 @@ namespace Render
 
       void operator()(const RenderTask& t, oneapi::tbb::feeder<RenderTask> &feeder) const 
       {
+        // taotodo can we just << from opencv's Complex?
         std::stringstream ss;
-        ss << "rendering " << t.z.r;
-        if (t.z.i < 0) ss << " - " << -t.z.i << "i" << std::endl;
-        else ss << " + " << t.z.i << "i" << std::endl;
+        ss << "rendering " << t.z.re;
+        if (t.z.im < 0) ss << " - " << -t.z.im << "i" << std::endl;
+        else ss << " + " << t.z.im << "i" << std::endl;
         
         std::cout << ss.str();
 
@@ -76,7 +77,7 @@ namespace Render
         for (double r=boundRect.minRe(); r<boundRect.maxRe(); r+=resolution)
           for (double i=boundRect.minIm(); i<boundRect.maxIm(); i+=resolution)
           {
-            auto z = Complex(r, i);
+            auto z = Z::Z(r, i);
             tasks.push_back(RenderTask(&fractal, z, canvas.data()));
 
             // Coordinate for canvas
