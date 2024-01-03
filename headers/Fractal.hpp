@@ -18,9 +18,10 @@ namespace Fractal
   public:
     Fractal(const double &bound, const Z::Z &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
+    int maxIters() const { return this->nMaxIters; };
 
     // Supposed to be atomic and thread-safe
-    virtual int convergence(Z::Z &z, int nIter = 0) const;
+    virtual int convergence(const Z::Z &z, int nIter = 0) const;
   };
 
   class JuliaSet : public Fractal
@@ -28,6 +29,6 @@ namespace Fractal
   public:
     inline JuliaSet(const double &bound, const Z::Z &c, const int nMaxIters) : Fractal(bound, c, nMaxIters){};
     inline ~JuliaSet(){};
-    int convergence(Z::Z &z, int nIter = 0) const;
+    int convergence(const Z::Z &z, int nIter = 0) const;
   };
 }

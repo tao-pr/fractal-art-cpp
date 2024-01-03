@@ -26,6 +26,3 @@ cmake -DCMAKE_C_COMPILER=$(brew --prefix llvm@16)/bin/clang \
       -DLLVM_INCLUDE_TESTS=Off \
       ..
 make
-
-# taotodo:
-# -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wall -g -O1" ..

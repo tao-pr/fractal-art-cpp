@@ -59,21 +59,22 @@ brew install tbb
 brew install opencv
 ```
 
-3. Build the project using clang (LLVM):
+3. Build the project and run the executable:
 
   ```shell
-  ./make.sh
-  ```
-
-4. Run the executable:
-
-  ```shell
-  bin/julia
+  ./make.sh && bin/julia 0 -0.75 50 0.0001
   ```
 
 ## Usage
 
-TBD
+The executable accepts the following positional arguments
+
+- re
+- im
+- max iters
+- resolution (lower value generates higher precision)
+
+After run, it will write an output image to `fractal.png`.
 
 ## Contributing
 

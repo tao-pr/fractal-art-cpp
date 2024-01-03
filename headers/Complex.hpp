@@ -30,12 +30,12 @@ namespace Z
 
   inline Z zero = Z(0,0);
 
-  inline Z sqr(Z& z)
+  inline Z sqr(const Z& z)
   {
     return Z(z.re*z.re - z.im*z.im, 2*z.re*z.im);
   }
 
-  inline double mag(Z &z)
+  inline double mag(const Z &z)
   {
     return sqrt(z.re*z.re + z.im*z.im);
   }

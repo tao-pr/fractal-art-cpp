@@ -1,8 +1,10 @@
 #pragma once
 
+#include <math.h>
+
 #include "Complex.hpp"
 
-namespace Geometry // taotodo maybe not used
+namespace Geometry
 {
   class ComplexRect
   {
@@ -18,8 +20,10 @@ namespace Geometry // taotodo maybe not used
       return (z.re >= r0 && z.re <= r1 && z.im >= i0 && z.im <= i1);
     };
     double minRe() const { return r0; };
-    double maxRe()  const { return r1; };
-    double minIm()  const { return i0; };
-    double maxIm()  const { return i1; };
+    double maxRe() const { return r1; };
+    double minIm() const { return i0; };
+    double maxIm() const { return i1; };
+    int width(double resolution) const { return ceil((r1 - r0) / resolution); };
+    int height(double resolution) const { return ceil((i1 - i0) / resolution); };
   };
 };

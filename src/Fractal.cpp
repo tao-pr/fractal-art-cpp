@@ -3,12 +3,12 @@
 namespace Fractal
 {
   Fractal::~Fractal() {};
-  int Fractal::convergence(Z::Z &z, int nIter) const
+  int Fractal::convergence(const Z::Z &z, int nIter) const
   {
     return -1;
   }
 
-  int JuliaSet::convergence(Z::Z &z, int nIter) const
+  int JuliaSet::convergence(const Z::Z &z, int nIter) const
   {
     Complex z_ = Z::sqr(z) + this->c;
     if (Z::mag(z_) <= this->bound)
