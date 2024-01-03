@@ -20,8 +20,10 @@ int main(int argc, char *argv[])
   std::string sim = argc > 2 ? argv[2] : "0.0";
   std::string iter = argc > 3 ? argv[3] : "25";
   std::string sres = argc > 4 ? argv[4] : "0.001";
+  std::string sbound = argc > 5 ? argv[5] : "1.0";
   float re = atof(sre.c_str());
   float im = atof(sim.c_str());
+  float bound = atof(sbound.c_str());
 
   std::cout << "Generating fractal... c = " << re;
   if (im < 0)
@@ -30,15 +32,15 @@ int main(int argc, char *argv[])
     std::cout << " + " << im << "i" << std::endl;
   std::cout << "Max iterations: " << iter << std::endl;
   std::cout << "Resolution: " << sres << std::endl;
+  std::cout << "Bound: " << bound << std::endl;
   
   // Generate fractal
   std::shared_ptr<Render::Render> render = std::make_shared<Render::Render>();
-  double bound = 1.0;
   const int maxIters = atoi(iter.c_str());
   double resolution = atof(sres.c_str());
   auto c = Complex(re, im);
   auto fractal = Fractal::JuliaSet(bound, c, maxIters);
-  auto boundRect = Geometry::ComplexRect(-1, 1, -1, 1);
+  auto boundRect = Geometry::ComplexRect(-bound, bound, -bound, bound);
   render->render(fractal, boundRect, resolution);
 
   std::cout << "Press any key to exit..." << std::endl;
