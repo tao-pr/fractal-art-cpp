@@ -20,4 +20,14 @@ namespace Z
   {
     return sqrt(z.re*z.re + z.im*z.im);
   }
+
+  inline Z add(const Z &z, const double& c)
+  {
+    return Z(z.re + c, z.im);
+  }
+
+  inline Z mul(const Z &z, const double& c)
+  {
+    return Z(z.re * c, z.im * c);
+  }
 }

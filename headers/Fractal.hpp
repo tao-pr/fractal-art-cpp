@@ -31,4 +31,12 @@ namespace Fractal
     inline ~JuliaSet(){};
     int convergence(const Z::Z &z, int nIter = 0) const;
   };
+
+  class Degree4JuliaSet : public Fractal
+  {
+  public:
+    inline Degree4JuliaSet(const double &bound, const Z::Z &c, const int nMaxIters) : Fractal(bound, c, nMaxIters){};
+    inline ~Degree4JuliaSet(){};
+    int convergence(const Z::Z &z, int nIter = 0) const;
+  };
 }
