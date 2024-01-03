@@ -85,7 +85,7 @@ After run, it will write an output image to `fractal.png`.
 ./make.sh && bin/julia 0.285 0 200 0.001
 ./make.sh && bin/julia -0.70176 0.3842 100 0.001
 ./make.sh && bin/julia 0.285 0.01 200 0.001
-./make.sh && bin/julia -0.835 -0.2321 100 0.001
+./make.sh && bin/julia -0.835 -0.2321 100 0.001 1.2
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001 1.5
 ```
