@@ -21,11 +21,12 @@ int main(int argc, char *argv[])
   std::string iter = argc > 3 ? argv[3] : "25";
   std::string sres = argc > 4 ? argv[4] : "0.001";
   std::string sbound = argc > 5 ? argv[5] : "1.0";
+  std::string sfractal = argc > 6 ? argv[6] : "julia";
   float re = atof(sre.c_str());
   float im = atof(sim.c_str());
   float bound = atof(sbound.c_str());
 
-  std::cout << "Generating fractal... c = " << re;
+  std::cout << "Generating fractal '" << sfractal << "'... c = " << re;
   if (im < 0)
     std::cout << " - " << -im << "i" << std::endl;
   else
@@ -39,7 +40,21 @@ int main(int argc, char *argv[])
   const int maxIters = atoi(iter.c_str());
   double resolution = atof(sres.c_str());
   auto c = Complex(re, im);
-  auto fractal = Fractal::JuliaSet(bound, c, maxIters);
+
+  std::shared_ptr<Fractal::Fractal> fractal;
+  
+  if (sfractal == "complex")
+    fractal = std::make_shared<Fractal::ComplexJuliaSet>(Fractal::ComplexJuliaSet(bound, c, maxIters));
+  else if (sfractal == "degree4")
+    fractal = std::make_shared<Fractal::Degree4JuliaSet>(Fractal::Degree4JuliaSet(bound, c, maxIters));
+  else if (sfractal == "julia")
+    fractal = std::make_shared<Fractal::JuliaSet>(Fractal::JuliaSet(bound, c, maxIters));
+  else
+  {
+    std::cout << "Unknown fractal '" << sfractal << "'" << std::endl;
+    return -1;
+  }
+
   auto boundRect = Geometry::ComplexRect(-bound, bound, -bound, bound);
   render->render(fractal, boundRect, resolution);
 

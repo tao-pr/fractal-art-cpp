@@ -27,9 +27,9 @@ namespace Render
     int x, y;             // pixel coordinates
     unsigned char *pixel; // pointer to first pixel of 3 (RGB)
     Z::Z z;
-    Fractal::Fractal const *fractal;
+    std::shared_ptr<Fractal::Fractal> fractal;
     int iter;
-    RenderTask(const Fractal::Fractal *fractal, const int x, const int y, const Z::Z &z, unsigned char *pixel)
+    RenderTask(std::shared_ptr<Fractal::Fractal> fractal, const int x, const int y, const Z::Z &z, unsigned char *pixel)
         : fractal(fractal), x(x), y(y), z(z), iter(0), pixel(pixel){};
   };
 
@@ -62,7 +62,7 @@ namespace Render
       *(t.pixel + 2) = r;
     };
 
-    void render(const Fractal::Fractal &fractal, const Geometry::ComplexRect &boundRect, const double &resolution = 0.01)
+    void render(std::shared_ptr<Fractal::Fractal> fractal, const Geometry::ComplexRect &boundRect, const double &resolution = 0.01)
     {
       std::vector<RenderTask> tasks;
 
@@ -77,7 +77,7 @@ namespace Render
           int y = floor((i - boundRect.minIm()) / resolution);
 
           auto z = Z::Z(r, i);
-          tasks.push_back(RenderTask(&fractal, x, y, z, &pixels[x * 3 + (y * width * 3)]));
+          tasks.push_back(RenderTask(fractal, x, y, z, &pixels[x * 3 + (y * width * 3)]));
         }
 
       // render all in parallel

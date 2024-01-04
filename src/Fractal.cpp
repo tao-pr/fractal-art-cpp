@@ -2,11 +2,7 @@
 
 namespace Fractal
 {
-  Fractal::~Fractal() {};
-  int Fractal::convergence(const Z::Z &z, int nIter) const
-  {
-    return -1;
-  }
+  Fractal::~Fractal(){};
 
   int JuliaSet::convergence(const Z::Z &z, int nIter) const
   {
@@ -14,14 +10,15 @@ namespace Fractal
     if (Z::mag(z_) <= this->bound)
     {
       if (nIter + 1 < this->nMaxIters)
-        return convergence(z_, nIter+1);
-      else 
-        return nIter+1;
+        return convergence(z_, nIter + 1);
+      else
+        return nIter + 1;
     }
-    else return nIter;
+    else
+      return nIter;
   }
 
-  int Degree4JuliaSet::convergence(const Z::Z &z, int nIter) const
+  int ComplexJuliaSet::convergence(const Z::Z &z, int nIter) const
   {
     Complex z2 = Z::sqr(z);
     Complex z3 = z2 * z;
@@ -31,10 +28,25 @@ namespace Fractal
     if (Z::mag(z_) <= this->bound)
     {
       if (nIter + 1 < this->nMaxIters)
-        return convergence(z_, nIter+1);
-      else 
-        return nIter+1;
+        return convergence(z_, nIter + 1);
+      else
+        return nIter + 1;
     }
-    else return nIter;
+    else
+      return nIter;
+  }
+
+  int Degree4JuliaSet::convergence(const Z::Z &z, int nIter) const
+  {
+    Complex z_ = Z::sqr(Z::sqr(z)) + this->c;
+    if (Z::mag(z_) <= this->bound)
+    {
+      if (nIter + 1 < this->nMaxIters)
+        return convergence(z_, nIter + 1);
+      else
+        return nIter + 1;
+    }
+    else
+      return nIter;
   }
 }
