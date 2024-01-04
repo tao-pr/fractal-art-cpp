@@ -41,7 +41,7 @@ link_directories(
 )
 
 # Source files
-# taotodo avoid globbing
+# NOTE: In fact we should avoid GLOBBING source files, but it's just a small project.
 message("Including source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 file(GLOB SOURCES 
   "${CMAKE_CURRENT_SOURCE_DIR}/headers/*.hpp"
