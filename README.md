@@ -80,6 +80,7 @@ After run, it will write an output image to `fractal.png`.
 ## Some good examples
 
 ```sh
+# Simple Julia (degree2)
 ./make.sh && bin/julia 0.285 0.01 200 0.001
 ./make.sh && bin/julia -0.4 0.6 200 0.001
 ./make.sh && bin/julia 0.285 0 200 0.001
@@ -88,6 +89,21 @@ After run, it will write an output image to `fractal.png`.
 ./make.sh && bin/julia -0.835 -0.2321 100 0.001 1.2
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001 1.5
+./make.sh && bin/julia -0.3905407802 -0.5867879073 150 0.001 # Siegel disks
+./make.sh && bin/julia -2 1 10 0.001 2
+./make.sh && bin/julia -1.77578 0 10 0.001 2 # Peitgen et al 1992
+./make.sh && bin/julia 0 1 30 0.001 2 # Dendritic
+
+# Degree4 Julia
+./make.sh && bin/julia 0.6 0.55 100 0.001 0.99 degree4
+./make.sh && bin/julia -2 1 10 0.001 1.5 degree4
+./make.sh && bin/julia 0 1 15 0.001 1.5 degree4
+
+# Complex Julia
+./make.sh && bin/julia 0.6 0.55 10 0.001 1.2 complex
+./make.sh && bin/julia -0.3905407802 -0.5867879073 30 0.001 1 Complex
+./make.sh && bin/julia -2 1 10 0.001 1.5 complex
+./make.sh && bin/julia 0 1 15 0.001 1.5 complex
 ```
 
 ## Contributing
