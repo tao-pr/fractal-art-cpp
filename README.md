@@ -106,6 +106,18 @@ After run, it will write an output image to `fractal.png`.
 ./make.sh && bin/julia 0 1 15 0.001 1.5 complex
 ```
 
+## Samples
+
+See sample renders in `/samples` dir.
+
+![sample1](samples/fractal-1.png)
+
+![sample1](samples/fractal-2.png)
+
+![sample1](samples/fractal-3.png)
+
+![sample1](samples/fractal-4.png)
+
 ## Contributing
 
 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
