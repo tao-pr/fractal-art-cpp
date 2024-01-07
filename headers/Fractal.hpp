@@ -47,4 +47,12 @@ namespace Fractal
     inline ~ComplexJuliaSet(){};
     int convergence(const Z::Z &z, int nIter = 0) const override;
   };
+
+  class NovaFractal : public Fractal
+  {
+  public:
+    inline NovaFractal(const double &bound, const Z::Z &c, const int nMaxIters) : Fractal(bound, c, nMaxIters){};
+    inline ~NovaFractal(){};
+    int convergence(const Z::Z &z, int nIter = 0) const override;
+  };
 }

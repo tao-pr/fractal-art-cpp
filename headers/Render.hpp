@@ -89,10 +89,10 @@ namespace Render
       // Display plot
       auto rendered = cv::Mat(height, width, CV_8UC3, pixels);
       cv::namedWindow("Fractal");
-      display(rendered);
+      display(rendered, boundRect);
     }
 
-    void display(cv::Mat &rendered)
+    void display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect)
     {
       // Resize to fit window
       if (rendered.size().width != WND_WIDTH || rendered.size().height != WND_HEIGHT)
@@ -106,6 +106,22 @@ namespace Render
         cv::imshow("Fractal", rendered);
 
       cv::imwrite("fractal.png", rendered);
+      Geometry::ComplexRect *boundRectPtr = new Geometry::ComplexRect(boundRect);
+      cv::setMouseCallback("Fractal", mouseCallback, boundRectPtr);
+    }
+
+    static void mouseCallback(int event, int x, int y, int flags, void *userdata)
+    {
+      if (event == cv::EVENT_LBUTTONDOWN)
+      {
+        auto boundRect = (Geometry::ComplexRect *)userdata;
+        double re = boundRect->minRe() + (x * (boundRect->maxRe() - boundRect->minRe()) / WND_WIDTH);
+        double im = boundRect->minIm() + (y * (boundRect->maxIm() - boundRect->minIm()) / WND_HEIGHT);
+        std::cout << "Mouse clicked at (" << re << ", " << im << ")" << std::endl;
+        
+        // taodebug
+        std::cout << "boundRect: " << boundRect->minRe() << ", " << boundRect->maxRe() << ", " << boundRect->minIm() << ", " << boundRect->maxIm() << std::endl;
+      }
     }
 
   };

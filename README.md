@@ -82,6 +82,7 @@ After run, it will write an output image to `fractal.png`.
 ```sh
 # Simple Julia (degree2)
 ./make.sh && bin/julia 0.285 0.01 200 0.001
+./make.sh && bin/julia 0.285 0.01 200 0.001 1 julia 0.4784,0.1832
 ./make.sh && bin/julia -0.4 0.6 200 0.001
 ./make.sh && bin/julia 0.285 0 200 0.001
 ./make.sh && bin/julia -0.70176 0.3842 100 0.001

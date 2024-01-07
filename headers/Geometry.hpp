@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "Complex.hpp"
+#include "iostream"
 
 namespace Geometry
 {
@@ -25,5 +26,11 @@ namespace Geometry
     double maxIm() const { return i1; };
     int width(double resolution) const { return ceil((r1 - r0) / resolution); };
     int height(double resolution) const { return ceil((i1 - i0) / resolution); };
+  };
+
+  inline ComplexRect makeComplexRect(const float& centreRe, const float& contreIm, const float& bound)
+  {
+    auto rect = ComplexRect(centreRe - bound, centreRe + bound, contreIm - bound, contreIm + bound);
+    return rect;
   };
 };

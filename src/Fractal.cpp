@@ -49,4 +49,20 @@ namespace Fractal
     else
       return nIter;
   }
+
+  int NovaFractal::convergence(const Z::Z &z, int nIter) const
+  {
+    Complex z_1 = Z::add(z, -1);
+    Complex z2 = Z::sqr(z);
+    Complex z_ = z - (z_1 * z_1 * z_1 / Z::mul(z2, 3)) + this->c;
+    if (Z::mag(z_) <= this->bound)
+    {
+      if (nIter + 1 < this->nMaxIters)
+        return convergence(z_, nIter + 1);
+      else
+        return nIter + 1;
+    }
+    else
+      return nIter;
+  }
 }
