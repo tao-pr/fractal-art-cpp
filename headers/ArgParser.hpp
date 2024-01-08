@@ -48,7 +48,10 @@ namespace ArgParser
     if (std::getline(ss, aniType, ':'))
     {
       if (!std::getline(ss, token, ':'))
+      {
+        std::cerr << "Missing animation number of frames" << std::endl;
         throw new std::runtime_error("Missing animation number of frames");
+      }      
       
       int numFrames = std::stoi(token);
       // taodebug
@@ -77,6 +80,10 @@ namespace ArgParser
         throw new std::runtime_error("'Complex' animation type not implemented yet");
       }
     }
-    else throw new std::runtime_error("Animation params must be delimited by a colon");
+    else 
+    {
+      std::cerr << "Animation params must be delimited by a colon" << std::endl;
+      throw new std::runtime_error("Animation params must be delimited by a colon");
+    }
   }
 };

@@ -5,6 +5,7 @@
 #include <variant>
 #include <memory>
 #include <tuple>
+#include <optional>
 
 #include "Const.hpp"
 #include "Fractal.hpp"
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
   std::string sbound = argc > 5 ? argv[5] : "1.0";
   std::string sfractal = argc > 6 ? argv[6] : "julia";
   std::string scentre = argc > 7 ? argv[7] : "0.0,0.0";
-  std::string animator = argc > 8 ? argv[8] : "none";
+  std::string animator = argc > 8 ? argv[8] : "";
   float re = atof(sre.c_str());
   float im = atof(sim.c_str());
   float bound = atof(sbound.c_str());
@@ -41,6 +42,18 @@ int main(int argc, char *argv[])
   std::cout << "Resolution: " << sres << std::endl;
   std::cout << "Bound: " << bound << std::endl;
   std::cout << "Centre: " << centreRe << ", " << centreIm << std::endl;
+
+  auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
+  auto animParams = (animator.size() > 1) ?
+    std::optional<Animation::Params>(ArgParser::parseAniParams(animator, boundRect)) :
+    std::nullopt;
+
+  if (animParams.has_value())
+  {
+    std::cout << "Animation: " << animator << std::endl;
+    std::cout << "Animation frames: " << animParams->nFrames << std::endl;
+  }
+  else std::cout << "No animation" << std::endl;
   
   // Generate fractal
   std::shared_ptr<Render::Render> render = std::make_shared<Render::Render>();
@@ -64,7 +77,7 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
+  
   render->render(fractal, boundRect, resolution);
 
   std::cout << "Press any key to exit..." << std::endl;
