@@ -64,9 +64,6 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  // taotodo create bound rect from centre
-  // auto boundRect = Geometry::ComplexRect(-bound, bound, -bound, bound);
-  // auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
   auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
   render->render(fractal, boundRect, resolution);
 

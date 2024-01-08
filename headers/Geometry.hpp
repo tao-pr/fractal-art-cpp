@@ -26,6 +26,8 @@ namespace Geometry
     double maxIm() const { return i1; };
     int width(double resolution) const { return ceil((r1 - r0) / resolution); };
     int height(double resolution) const { return ceil((i1 - i0) / resolution); };
+    double centreRe() const { return (r0 + r1) / 2.0; };
+    double centreIm() const { return (i0 + i1) / 2.0; };
   };
 
   inline ComplexRect makeComplexRect(const float& centreRe, const float& contreIm, const float& bound)

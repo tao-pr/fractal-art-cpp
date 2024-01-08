@@ -70,6 +70,7 @@ namespace Render
       int height = boundRect.height(resolution);
       unsigned char *pixels = new unsigned char[width * height * 3];
 
+      std::cout << "Preparing parallel tasks..." << std::endl; 
       for (double r = boundRect.minRe(); r < boundRect.maxRe(); r += resolution)
         for (double i = boundRect.minIm(); i < boundRect.maxIm(); i += resolution)
         {
@@ -81,7 +82,7 @@ namespace Render
         }
 
       // render all in parallel
-      std::cout << "Submitting " << tasks.size() << " parallel render tasks (" << width << "x" << height << ")" << std::endl;
+      std::cout << "Submitted " << tasks.size() << " parallel render tasks (" << width << "x" << height << ")" << std::endl;
       oneapi::tbb::parallel_for_each(tasks.begin(), tasks.end(), Render());
 
       std::cout << GREEN << "Finished " << tasks.size() << " parallel render tasks (" << width << "x" << height << ")" << RESET << std::endl;
@@ -118,9 +119,6 @@ namespace Render
         double re = boundRect->minRe() + (x * (boundRect->maxRe() - boundRect->minRe()) / WND_WIDTH);
         double im = boundRect->minIm() + (y * (boundRect->maxIm() - boundRect->minIm()) / WND_HEIGHT);
         std::cout << "Mouse clicked at (" << re << ", " << im << ")" << std::endl;
-        
-        // taodebug
-        std::cout << "boundRect: " << boundRect->minRe() << ", " << boundRect->maxRe() << ", " << boundRect->minIm() << ", " << boundRect->maxIm() << std::endl;
       }
     }
 
