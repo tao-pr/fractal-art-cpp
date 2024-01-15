@@ -116,9 +116,7 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 ```sh
 # Make sure you have H264 codec installed
-./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012 zoom:16:ratio=0.98
-
-# This will render 5 frames, zoomin step size of 0.1
+./make.sh && bin/julia -0.835 -0.2321 60 0.001 2 julia 0.54763,0.111592 zoom:72:0.99
 ```
 
 
