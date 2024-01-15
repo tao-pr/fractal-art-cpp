@@ -20,12 +20,6 @@ namespace Animation
 
     std::cout << "[" << newRect.minRe() << ", " << newRect.maxRe() << "] res = " << resolution << std::endl;
 
-    #ifdef DEBUG
-    std::cout << "old width = " << oldRect.width(fr.resolution) << std::endl;
-    std::cout << "new width = " << newRect.width(fr.resolution) << std::endl;
-    std::cout << "new width' = " << newRect.width(resolution) << std::endl;
-    #endif
-
     return Frame{newRect, fr.c, resolution};
   };
 

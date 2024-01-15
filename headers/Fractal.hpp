@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "Const.hpp"
 #include "Complex.hpp"
 #include "Geometry.hpp"
 
@@ -19,6 +20,7 @@ namespace Fractal
     Fractal(const double &bound, const Z::Z &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
     int maxIters() const { return this->nMaxIters; };
+    void decayIters() { this->nMaxIters = max(MIN_NUM_ITERS, this->nMaxIters - DECAY_ITERS); };
 
     // Supposed to be atomic and thread-safe
     virtual int convergence(const Z::Z &z, int nIter = 0) const = 0;

@@ -115,7 +115,7 @@ For still image
 For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
 
 ```sh
-# Make sure you have H264 codec installed
+# Zoom-in animation example
 ./make.sh && bin/julia -0.835 -0.2321 60 0.001 2 julia 0.54763,0.111592 zoom:72:0.99
 ```
 

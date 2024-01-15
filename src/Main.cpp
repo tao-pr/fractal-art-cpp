@@ -99,6 +99,15 @@ int main(int argc, char *argv[])
       else
         break;
 
+      #ifdef DECAY_ON
+      if (fi % DECAY_ITER_EVERY == 0 && fi > 0)
+      {
+        // decay number of iteration
+        fractal->decayIters();
+        std::cout << YELLOW << "Decaying max iters to " << fractal->maxIters() << RESET << std::endl;
+      }
+      #endif
+
       #ifdef RENDER_FRAME_IMAGE
       fs::path root = fs::current_path();
       fs::path framePath = root / "frames/" / ("f-" + std::to_string(fi) + ".png");
