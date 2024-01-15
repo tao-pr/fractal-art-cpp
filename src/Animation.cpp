@@ -5,11 +5,13 @@ namespace Animation
   Frame ZoomStep::next(const Frame &fr) const
   {
     auto oldRect = fr.boundRect;
-    auto bound = (oldRect.maxRe() - oldRect.minRe()) / 2;
+    auto boundRe = (oldRect.maxRe() - oldRect.minRe()) / 2;
+    auto boundIm = (oldRect.maxIm() - oldRect.minIm()) / 2;
     auto newRect = Geometry::makeComplexRect(
         oldRect.centreRe(),
         oldRect.centreIm(),
-        bound - step); // zoom in by default
+        boundRe * ratio,
+        boundIm * ratio);
 
     // After zoom, number of pixels should remain the same
     float oldRange = oldRect.maxRe() - oldRect.minRe();

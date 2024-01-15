@@ -46,7 +46,9 @@ int main(int argc, char *argv[])
   std::cout << "Bound: " << bound << std::endl;
   std::cout << "Centre: " << centreRe << ", " << centreIm << std::endl;
 
-  auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
+  float aspectRatio = (float)WND_WIDTH / (float)WND_HEIGHT;
+  std::cout << "Aspect ratio: " << aspectRatio << std::endl;
+  auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound * aspectRatio, bound);
   auto animParams = (animator.size() > 1) ? std::optional<Animation::Params>(ArgParser::parseAniParams(animator, boundRect)) : std::nullopt;
 
   if (animParams.has_value())
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
     std::cout << "Animation frames: " << animParams->nFrames << std::endl;
   }
   else
-    std::cout << "No animation" << std::endl;
+    std::cout << RED << "No animation" << RESET << std::endl;
 
   // Generate fractal
   std::shared_ptr<Render::Render> render = std::make_shared<Render::Render>();
@@ -82,7 +84,9 @@ int main(int argc, char *argv[])
   // Render still image / animation
   if (animParams.has_value())
   {
+    // codecs: https://gist.github.com/takuma7/44f9ecb028ff00e2132e
     std::cout << "Rendering animation of " << animParams->nFrames << " frames..." << std::endl;
+    cv::VideoWriter video("rendered.mp4", cv::VideoWriter::fourcc('h','2','6','4'), FPS, cv::Size(WND_WIDTH, WND_HEIGHT));
 
     auto frame = Animation::Frame{boundRect, c, resolution};
     for (unsigned int fi = 0; fi < animParams->nFrames; fi++)
@@ -95,13 +99,16 @@ int main(int argc, char *argv[])
       else
         break;
 
+      #ifdef RENDER_FRAME_IMAGE
       fs::path root = fs::current_path();
       fs::path framePath = root / "frames/" / ("f-" + std::to_string(fi) + ".png");
       std::cout << "Writing frame to " << framePath << std::endl;
       cv::imwrite(framePath.string(), frameImage);
+      #endif
+      video.write(frameImage);
     }
 
-    // taotodo write mp4 video
+    video.release();
   }
   else
   {

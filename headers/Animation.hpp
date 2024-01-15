@@ -23,8 +23,8 @@ namespace Animation
   class ZoomStep : public FrameStep
   {
   public:
-    ZoomStep(const float &step) : step(step){};
-    float step;
+    ZoomStep(const float &ratio) : ratio(ratio){};
+    float ratio;
     Frame next(const Frame &fr) const override;
   };
 

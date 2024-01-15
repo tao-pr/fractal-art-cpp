@@ -61,7 +61,7 @@ target_link_libraries(
   ${TARGET_APP} 
   ${llvm_libs} 
   -ltbb 
-  -lopencv_photo -lopencv_imgproc -lopencv_core -lopencv_highgui -lopencv_imgcodecs)
+  -lopencv_photo -lopencv_imgproc -lopencv_core -lopencv_highgui -lopencv_imgcodecs -lopencv_videoio -lopencv_video)
 
 message(STATUS "Build output : ${CMAKE_BINARY_DIR}")
 

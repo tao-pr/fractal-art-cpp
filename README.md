@@ -112,7 +112,9 @@ For still image
 For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
 
 ```sh
-taotodo:
+./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012 zoom:48:ratio=0.95
+
+# This will render 5 frames, zoomin step size of 0.1
 ```
 
 

@@ -62,7 +62,7 @@ namespace ArgParser
       {
         // eg params = "step=0.001,"
         //    params = "step=0.001,foo=bar"
-        auto step = std::make_shared<Animation::ZoomStep>(0.001f);
+        auto step = std::make_shared<Animation::ZoomStep>(0.92f);
 
         std::string pair;
         while (std::getline(streamParams, pair, ','))
@@ -72,9 +72,9 @@ namespace ArgParser
           if (std::getline(pairStream, key, '=') && std::getline(pairStream, value, '='))
           {
             std::cout << "extracted: " << key << " -> " << value << std::endl;
-            if (key == "step")
+            if (key == "ratio")
             {
-              step->step = std::stof(value);
+              step->ratio = std::stof(value);
             }
           }
         };
