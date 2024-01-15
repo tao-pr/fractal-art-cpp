@@ -93,27 +93,31 @@ namespace Render
       // Display plot
       auto rendered = cv::Mat(height, width, CV_8UC3, pixels);
       cv::namedWindow("Fractal");
-      display(rendered, boundRect);
-      return rendered;
+      return display(rendered, boundRect);
     }
 
-    void display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect, bool writeToPNG = true)
+    Mat display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect, bool writeToPNG = true)
     {
       // Resize to fit window
+      cv::Mat resized;
       if (rendered.size().width != WND_WIDTH || rendered.size().height != WND_HEIGHT)
       {
-        cv::Mat resized;
         cv::resize(rendered, resized, cv::Size(WND_WIDTH, WND_HEIGHT));
         cv::imshow("Fractal", resized);
         std::cout << "Resized from " << rendered.size << " to " << WND_WIDTH << " x " << WND_HEIGHT << std::endl;
       }
       else
+      {
         cv::imshow("Fractal", rendered);
+        resized = rendered;
+      }
 
       if (writeToPNG)
         cv::imwrite("fractal.png", rendered);
       Geometry::ComplexRect *boundRectPtr = new Geometry::ComplexRect(boundRect);
       cv::setMouseCallback("Fractal", mouseCallback, boundRectPtr);
+
+      return resized;
     }
 
     static void mouseCallback(int event, int x, int y, int flags, void *userdata)

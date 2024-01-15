@@ -86,12 +86,12 @@ int main(int argc, char *argv[])
   {
     // codecs: https://gist.github.com/takuma7/44f9ecb028ff00e2132e
     std::cout << "Rendering animation of " << animParams->nFrames << " frames..." << std::endl;
-    cv::VideoWriter video("rendered.mp4", cv::VideoWriter::fourcc('h','2','6','4'), FPS, cv::Size(WND_WIDTH, WND_HEIGHT));
+    cv::VideoWriter video("rendered.mp4", cv::VideoWriter::fourcc('a','v','c','1'), FPS, cv::Size(WND_WIDTH, WND_HEIGHT));
 
     auto frame = Animation::Frame{boundRect, c, resolution};
     for (unsigned int fi = 0; fi < animParams->nFrames; fi++)
     {
-      std::cout << "Rendering frame #" << fi << std::endl;
+      std::cout << CYAN << "Rendering frame #" << fi << RESET << std::endl;
       auto frameImage = render->render(fractal, frame.boundRect, frame.resolution);
 
       if (fi < animParams->nFrames - 1)

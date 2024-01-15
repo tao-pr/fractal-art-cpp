@@ -57,6 +57,9 @@ brew install tbb
 
 # Install OpenCV
 brew install opencv
+
+# Install OpenH264 video codec
+brew install openh264
 ```
 
 3. Build the project and run the executable:
@@ -112,7 +115,8 @@ For still image
 For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
 
 ```sh
-./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012 zoom:48:ratio=0.95
+# Make sure you have H264 codec installed
+./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012 zoom:16:ratio=0.98
 
 # This will render 5 frames, zoomin step size of 0.1
 ```
