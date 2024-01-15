@@ -13,7 +13,7 @@ namespace ArgParser
 {
   /**
    * @brief parse a string to a tuple of double (comma delimited)
-  */
+   */
   std::tuple<double, double> parseComplex(const std::string &s)
   {
     std::vector<double> values;
@@ -34,7 +34,7 @@ namespace ArgParser
 
   /**
    * @brief parse a string to animation params
-  */
+   */
   Animation::Params parseAniParams(const std::string &s, Geometry::ComplexRect &boundRect)
   {
     // Format of the animation params
@@ -44,6 +44,7 @@ namespace ArgParser
     std::stringstream ss(s);
     std::string aniType;
     std::string token;
+    std::string params;
 
     if (std::getline(ss, aniType, ':'))
     {
@@ -51,28 +52,34 @@ namespace ArgParser
       {
         std::cerr << "Missing animation number of frames" << std::endl;
         throw new std::runtime_error("Missing animation number of frames");
-      }      
-      
-      int numFrames = std::stoi(token);
-      // taodebug
-      std::cout << "animation frames = " << numFrames << std::endl;
+      }
 
-      if (aniType == "zoom")
+      std::getline(ss, params, ':');
+      auto streamParams = std::stringstream(params);
+
+      int numFrames = std::stoi(token);
+      if (aniType == "zoom" && params.size() > 1)
       {
+        // eg params = "step=0.001,"
+        //    params = "step=0.001,foo=bar"
         auto step = std::make_shared<Animation::ZoomStep>(0.001f);
-        while (std::getline(ss, token, ','))
+
+        std::string pair;
+        while (std::getline(streamParams, pair, ','))
         {
+          std::stringstream pairStream(pair);
           std::string key, value;
-          std::getline(ss, key, '=');
-          std::getline(ss, key, '=');
-          if (key == "step")
+          if (std::getline(pairStream, key, '=') && std::getline(pairStream, value, '='))
           {
-            // taodebug
-            std::cout << "zoom step = " << value << std::endl;
-            step->step = std::stof(value);
+            std::cout << "extracted: " << key << " -> " << value << std::endl;
+            if (key == "step")
+            {
+              step->step = std::stof(value);
+            }
           }
-        }
-        return Animation::Params{ boundRect, step, numFrames };
+        };
+
+        return Animation::Params{boundRect, step, numFrames};
       }
       else if (aniType == "complex")
       {
@@ -80,7 +87,7 @@ namespace ArgParser
         throw new std::runtime_error("'Complex' animation type not implemented yet");
       }
     }
-    else 
+    else
     {
       std::cerr << "Animation params must be delimited by a colon" << std::endl;
       throw new std::runtime_error("Animation params must be delimited by a colon");

@@ -62,7 +62,10 @@ namespace Render
       *(t.pixel + 2) = r;
     };
 
-    void render(std::shared_ptr<Fractal::Fractal> fractal, const Geometry::ComplexRect &boundRect, const double &resolution = 0.01)
+    Mat render(
+        std::shared_ptr<Fractal::Fractal> fractal,
+        const Geometry::ComplexRect &boundRect,
+        const double &resolution = 0.01)
     {
       std::vector<RenderTask> tasks;
 
@@ -70,7 +73,7 @@ namespace Render
       int height = boundRect.height(resolution);
       unsigned char *pixels = new unsigned char[width * height * 3];
 
-      std::cout << "Preparing parallel tasks..." << std::endl; 
+      std::cout << "Preparing parallel tasks..." << std::endl;
       for (double r = boundRect.minRe(); r < boundRect.maxRe(); r += resolution)
         for (double i = boundRect.minIm(); i < boundRect.maxIm(); i += resolution)
         {
@@ -91,9 +94,10 @@ namespace Render
       auto rendered = cv::Mat(height, width, CV_8UC3, pixels);
       cv::namedWindow("Fractal");
       display(rendered, boundRect);
+      return rendered;
     }
 
-    void display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect)
+    void display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect, bool writeToPNG = true)
     {
       // Resize to fit window
       if (rendered.size().width != WND_WIDTH || rendered.size().height != WND_HEIGHT)
@@ -106,7 +110,8 @@ namespace Render
       else
         cv::imshow("Fractal", rendered);
 
-      cv::imwrite("fractal.png", rendered);
+      if (writeToPNG)
+        cv::imwrite("fractal.png", rendered);
       Geometry::ComplexRect *boundRectPtr = new Geometry::ComplexRect(boundRect);
       cv::setMouseCallback("Fractal", mouseCallback, boundRectPtr);
     }
@@ -121,7 +126,6 @@ namespace Render
         std::cout << "Mouse clicked at (" << re << ", " << im << ")" << std::endl;
       }
     }
-
   };
 
 }

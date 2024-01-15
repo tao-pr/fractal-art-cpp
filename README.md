@@ -69,15 +69,17 @@ brew install opencv
 
 The executable accepts the following positional arguments
 
-- re
-- im
-- max iters
-- resolution (lower value generates higher precision)
-- boundary (symmetry for both imaginary and real axes)
+```sh
+./bin/julia {re} {im} {step_size} {num_iters} {scale} {fractal_type} {centre} {animation_params}
+```
 
-After run, it will write an output image to `fractal.png`.
+`{re}` and `{im}` represent a complex number (C) we want to explore a fractal set on, e.g. for Julia set (`z_next = z_current^2 + C`).
+
+See example of arguments in the next section. After run, it will write an output image to `fractal.png`.
 
 ## Some good examples
+
+For still image
 
 ```sh
 # Simple Julia (degree2)
@@ -106,6 +108,13 @@ After run, it will write an output image to `fractal.png`.
 ./make.sh && bin/julia -2 1 10 0.001 1.5 complex
 ./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012
 ```
+
+For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
+
+```sh
+taotodo:
+```
+
 
 ## Samples
 

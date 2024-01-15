@@ -6,11 +6,14 @@
 #include <memory>
 #include <tuple>
 #include <optional>
+#include <filesystem>
 
 #include "Const.hpp"
 #include "Fractal.hpp"
 #include "Render.hpp"
 #include "ArgParser.hpp"
+
+namespace fs = std::filesystem;
 
 int main(int argc, char *argv[])
 {
@@ -44,25 +47,24 @@ int main(int argc, char *argv[])
   std::cout << "Centre: " << centreRe << ", " << centreIm << std::endl;
 
   auto boundRect = Geometry::makeComplexRect(centreRe, centreIm, bound);
-  auto animParams = (animator.size() > 1) ?
-    std::optional<Animation::Params>(ArgParser::parseAniParams(animator, boundRect)) :
-    std::nullopt;
+  auto animParams = (animator.size() > 1) ? std::optional<Animation::Params>(ArgParser::parseAniParams(animator, boundRect)) : std::nullopt;
 
   if (animParams.has_value())
   {
     std::cout << "Animation: " << animator << std::endl;
     std::cout << "Animation frames: " << animParams->nFrames << std::endl;
   }
-  else std::cout << "No animation" << std::endl;
-  
+  else
+    std::cout << "No animation" << std::endl;
+
   // Generate fractal
   std::shared_ptr<Render::Render> render = std::make_shared<Render::Render>();
   const int maxIters = atoi(iter.c_str());
-  double resolution = atof(sres.c_str());
+  float resolution = atof(sres.c_str());
   auto c = Complex(re, im);
 
   std::shared_ptr<Fractal::Fractal> fractal;
-  
+
   if (sfractal == "complex")
     fractal = std::make_shared<Fractal::ComplexJuliaSet>(Fractal::ComplexJuliaSet(bound, c, maxIters));
   else if (sfractal == "degree4")
@@ -77,8 +79,35 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  
-  render->render(fractal, boundRect, resolution);
+  // Render still image / animation
+  if (animParams.has_value())
+  {
+    std::cout << "Rendering animation of " << animParams->nFrames << " frames..." << std::endl;
+
+    auto frame = Animation::Frame{boundRect, c, resolution};
+    for (unsigned int fi = 0; fi < animParams->nFrames; fi++)
+    {
+      std::cout << "Rendering frame #" << fi << std::endl;
+      auto frameImage = render->render(fractal, frame.boundRect, frame.resolution);
+
+      if (fi < animParams->nFrames - 1)
+        frame = animParams->frameStep->next(frame);
+      else
+        break;
+
+      fs::path root = fs::current_path();
+      fs::path framePath = root / "frames/" / ("f-" + std::to_string(fi) + ".png");
+      std::cout << "Writing frame to " << framePath << std::endl;
+      cv::imwrite(framePath.string(), frameImage);
+    }
+
+    // taotodo write mp4 video
+  }
+  else
+  {
+    std::cout << "Rendering still image..." << std::endl;
+    render->render(fractal, boundRect, resolution);
+  }
 
   std::cout << "Press any key to exit..." << std::endl;
   cv::waitKey(0);
