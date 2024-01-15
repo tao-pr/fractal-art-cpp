@@ -116,7 +116,7 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 ```sh
 # Zoom-in animation example
-./make.sh && bin/julia -0.835 -0.2321 60 0.001 2 julia 0.54763,0.111592 zoom:72:0.99
+./make.sh && bin/julia -0.835 -0.2321 80 0.001 2 julia 0.54763,0.111592 zoom:120:0.99
 ```
 
 

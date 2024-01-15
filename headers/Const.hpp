@@ -16,6 +16,6 @@ const int WND_HEIGHT = 1080;
 const int FPS = 24;
 
 #define DECAY_ON
-const int DECAY_ITER_EVERY = 25; // Number of steps to decay iterations 
-const int DECAY_ITERS = 3; // Number of iterations to decay by
+const int DECAY_ITER_EVERY = 30; // Number of steps to decay iterations 
+const int DECAY_ITERS = -5; // Number of iterations to decay by
 const int MIN_NUM_ITERS = 10;

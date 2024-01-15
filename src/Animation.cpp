@@ -18,7 +18,7 @@ namespace Animation
     float newRange = newRect.maxRe() - newRect.minRe();
     float resolution = newRange * fr.resolution / oldRange;
 
-    std::cout << "[" << newRect.minRe() << ", " << newRect.maxRe() << "] res = " << resolution << std::endl;
+    std::cout << "bound = " << boundIm << ", res = " << resolution << std::endl;
 
     return Frame{newRect, fr.c, resolution};
   };
