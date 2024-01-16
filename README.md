@@ -137,7 +137,7 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=-0.001,decay=-5,decayEvery=10
 
 # Rotation animation example
-./make.sh && bin/julia -0.4 0.6 200 0.001 1 julia 0,0 rotate:30:decay=0,angle=0.001
+./make.sh && bin/julia -0.4 0.6 250 0.001 1 julia 0,0 rotate:30:decay=0,angle=0.001
 ```
 
 Rendering a sequence of Julia set visualisations takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
