@@ -63,6 +63,9 @@ namespace ArgParser
         // eg params = "step=0.001,"
         //    params = "step=0.001,foo=bar"
         auto step = std::make_shared<Animation::ZoomStep>(0.92f);
+        auto decayEvery = 25;
+        auto decayIters = -5;
+        auto minIters = 10;
 
         std::string pair;
         while (std::getline(streamParams, pair, ','))
@@ -76,10 +79,27 @@ namespace ArgParser
             {
               step->ratio = std::stof(value);
             }
+            else if (key == "decayEvery")
+            {
+              decayEvery = std::stoi(value);
+            }
+            else if (key == "decay")
+            {
+              decayIters = std::stoi(value);
+            }
+            else if (key == "minIters")
+            {
+              minIters = std::stoi(value);
+            }
+            else
+            {
+              std::cerr << "Unknown key '" << key << "'" << std::endl;
+              throw new std::runtime_error("Unknown key");
+            }
           }
         };
 
-        return Animation::Params{boundRect, step, numFrames};
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
       }
       else if (aniType == "complex")
       {

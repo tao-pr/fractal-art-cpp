@@ -41,5 +41,10 @@ namespace Animation
     Geometry::ComplexRect boundRect;
     std::shared_ptr<FrameStep> frameStep;
     int nFrames;
+
+    // Decay factors
+    int decayItersEvery; // number of steps to decay number of iterations
+    int decaySize; // size of iterations to decay
+    int minNumIters; // minimum number of iterations after final decay
   };
 };

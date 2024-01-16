@@ -20,7 +20,10 @@ namespace Fractal
     Fractal(const double &bound, const Z::Z &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
     int maxIters() const { return this->nMaxIters; };
-    void decayIters() { this->nMaxIters = max(MIN_NUM_ITERS, this->nMaxIters - DECAY_ITERS); };
+    void decayIters(int decaySize, int minIters) 
+    { 
+      this->nMaxIters = max(minIters, this->nMaxIters - decaySize);
+    };
 
     // Supposed to be atomic and thread-safe
     virtual int convergence(const Z::Z &z, int nIter = 0) const = 0;
