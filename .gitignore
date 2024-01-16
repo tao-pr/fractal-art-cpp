@@ -1,0 +1,5 @@
+.DS_Store
+bin
+.vscode
+*.png
+*.mp4

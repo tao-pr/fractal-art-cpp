@@ -117,8 +117,36 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ```sh
 # Zoom-in animation example
 ./make.sh && bin/julia -0.835 -0.2321 80 0.001 2 julia 0.54763,0.111592 zoom:120:0.99
+
+# Zoom-in animation example
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473683,0.18845 zoom:240:ratio=0.98,decayEvery=8,decay=-6
 ```
 
+Rendering a sequence of Julia set visualisations takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
+
+```
+Rendering frame #210
+Preparing parallel tasks...
+Submitted 8610312 parallel render tasks (3912x2201)
+Finished 8610312 parallel render tasks (3912x2201)
+Resized from 2201 x 3912 to 1920 x 1080
+bound = 0.0158077, res = 1.40832e-05
+Rendering frame #211
+Preparing parallel tasks...
+Submitted 8610312 parallel render tasks (3912x2201)
+Finished 8610312 parallel render tasks (3912x2201)
+Resized from 2201 x 3912 to 1920 x 1080
+bound = 0.0154916, res = 1.38016e-05
+Rendering frame #212
+Preparing parallel tasks...
+Submitted 8610312 parallel render tasks (3912x2201)
+Finished 8610312 parallel render tasks (3912x2201)
+Resized from 2201 x 3912 to 1920 x 1080
+bound = 0.0151818, res = 1.35256e-05
+Rendering frame #213
+Preparing parallel tasks...
+Submitted 8610312 parallel render tasks (3912x2201)
+```
 
 ## Samples
 

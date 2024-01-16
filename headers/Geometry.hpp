@@ -30,7 +30,7 @@ namespace Geometry
     double centreIm() const { return (i0 + i1) / 2.0; };
   };
 
-  inline ComplexRect makeComplexRect(const float& centreRe, const float& contreIm, const float& boundRe, const float& boundIm)
+  inline ComplexRect makeComplexRect(const double& centreRe, const double& contreIm, const double& boundRe, const double& boundIm)
   {
     auto rect = ComplexRect(centreRe - boundRe, centreRe + boundRe, contreIm - boundIm, contreIm + boundIm);
     return rect;

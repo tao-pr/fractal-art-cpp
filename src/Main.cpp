@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
   std::string sfractal = argc > 6 ? argv[6] : "julia";
   std::string scentre = argc > 7 ? argv[7] : "0.0,0.0";
   std::string animator = argc > 8 ? argv[8] : "";
-  float re = atof(sre.c_str());
-  float im = atof(sim.c_str());
-  float bound = atof(sbound.c_str());
+  double re = atof(sre.c_str());
+  double im = atof(sim.c_str());
+  double bound = atof(sbound.c_str());
   std::tuple<double, double> centre = ArgParser::parseComplex(scentre);
   auto [centreRe, centreIm] = centre;
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
   // Generate fractal
   std::shared_ptr<Render::Render> render = std::make_shared<Render::Render>();
   const int maxIters = atoi(iter.c_str());
-  float resolution = atof(sres.c_str());
+  double resolution = atof(sres.c_str());
   auto c = Complex(re, im);
 
   std::shared_ptr<Fractal::Fractal> fractal;

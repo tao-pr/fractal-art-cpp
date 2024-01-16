@@ -11,7 +11,7 @@ namespace Animation
   {
     Geometry::ComplexRect boundRect;
     Z::Z c;
-    float resolution;
+    double resolution;
   };
 
   class FrameStep
@@ -23,8 +23,8 @@ namespace Animation
   class ZoomStep : public FrameStep
   {
   public:
-    ZoomStep(const float &ratio) : ratio(ratio){};
-    float ratio;
+    ZoomStep(const double &ratio) : ratio(ratio){};
+    double ratio;
     Frame next(const Frame &fr) const override;
   };
 

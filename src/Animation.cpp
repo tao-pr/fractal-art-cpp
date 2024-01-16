@@ -14,9 +14,9 @@ namespace Animation
         boundIm * ratio);
 
     // After zoom, number of pixels should remain the same
-    float oldRange = oldRect.maxRe() - oldRect.minRe();
-    float newRange = newRect.maxRe() - newRect.minRe();
-    float resolution = newRange * fr.resolution / oldRange;
+    double oldRange = oldRect.maxRe() - oldRect.minRe();
+    double newRange = newRect.maxRe() - newRect.minRe();
+    double resolution = newRange * fr.resolution / oldRange;
 
     std::cout << "bound = " << boundIm << ", res = " << resolution << std::endl;
 
