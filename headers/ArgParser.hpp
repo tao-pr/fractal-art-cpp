@@ -60,6 +60,7 @@ namespace ArgParser
       auto decayEvery = 25;
       auto decayIters = -5;
       auto minIters = 10;
+      auto maxIters = 500;
 
       int numFrames = std::stoi(token);
       if (aniType == "zoom" && params.size() > 1)
@@ -92,6 +93,10 @@ namespace ArgParser
             {
               minIters = std::stoi(value);
             }
+            else if (key == "maxIters")
+            {
+              maxIters = std::stoi(value);
+            }
             else
             {
               std::cerr << "Unknown key '" << key << "'" << std::endl;
@@ -100,7 +105,7 @@ namespace ArgParser
           }
         };
 
-        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters, maxIters};
       }
       else if (aniType == "complex" && params.size() > 1)
       {
@@ -135,6 +140,10 @@ namespace ArgParser
             {
               minIters = std::stoi(value);
             }
+            else if (key == "maxIters")
+            {
+              maxIters = std::stoi(value);
+            }
             else
             {
               std::cerr << "Unknown key '" << key << "'" << std::endl;
@@ -143,7 +152,7 @@ namespace ArgParser
           }
         };
 
-        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters, maxIters};
       }
       else if (aniType == "rotate" && params.size() > 1)
       {
@@ -174,6 +183,10 @@ namespace ArgParser
             {
               minIters = std::stoi(value);
             }
+            else if (key == "maxIters")
+            {
+              maxIters = std::stoi(value);
+            }
             else
             {
               std::cerr << "Unknown key '" << key << "'" << std::endl;
@@ -182,7 +195,7 @@ namespace ArgParser
           }
         };
 
-        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters, maxIters};
       }
     }
     else

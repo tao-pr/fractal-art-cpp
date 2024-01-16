@@ -20,12 +20,12 @@ namespace Fractal
     Fractal(const double &bound, const Z::Z &c, const int nMaxIters) : bound(bound), c(c), nMaxIters(nMaxIters){};
     virtual ~Fractal();
     int maxIters() const { return this->nMaxIters; };
-    void decayIters(int decaySize, int minIters) 
+    void decayIters(int decaySize, int minIters, int maxIters) 
     { 
       if (decaySize > 0)
         this->nMaxIters = max(minIters, this->nMaxIters - decaySize);
       else if (decaySize < 0)
-        this->nMaxIters = min(minIters, this->nMaxIters - decaySize);
+        this->nMaxIters = min(maxIters, this->nMaxIters - decaySize);
     };
 
     void updateC(Z::Z& c_)

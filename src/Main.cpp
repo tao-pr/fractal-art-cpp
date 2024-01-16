@@ -110,7 +110,10 @@ int main(int argc, char *argv[])
       if (fi % animParams->decayItersEvery == 0 && fi > 0)
       {
         // decay number of iteration
-        fractal->decayIters(animParams->decaySize, animParams->minNumIters);
+        fractal->decayIters(
+          animParams->decaySize, 
+          animParams->minNumIters,
+          animParams->maxNumIters);
         std::cout << YELLOW << "Decaying max iters to " << fractal->maxIters() << RESET << std::endl;
       }
 

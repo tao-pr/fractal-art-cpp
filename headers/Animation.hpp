@@ -54,5 +54,6 @@ namespace Animation
     int decayItersEvery; // number of steps to decay number of iterations
     int decaySize; // size of iterations to decay
     int minNumIters; // minimum number of iterations after final decay
+    int maxNumIters; // maxinum number of iterations after final decay (negative)
   };
 };
