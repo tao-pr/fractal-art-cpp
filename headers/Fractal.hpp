@@ -22,7 +22,10 @@ namespace Fractal
     int maxIters() const { return this->nMaxIters; };
     void decayIters(int decaySize, int minIters) 
     { 
-      this->nMaxIters = max(minIters, this->nMaxIters - decaySize);
+      if (decaySize > 0)
+        this->nMaxIters = max(minIters, this->nMaxIters - decaySize);
+      else if (decaySize < 0)
+        this->nMaxIters = min(minIters, this->nMaxIters - decaySize);
     };
 
     void updateC(Z::Z& c_)
