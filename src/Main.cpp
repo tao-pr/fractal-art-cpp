@@ -7,6 +7,7 @@
 #include <tuple>
 #include <optional>
 #include <filesystem>
+#include <locale>
 
 #include "Const.hpp"
 #include "Fractal.hpp"
@@ -20,6 +21,10 @@ int main(int argc, char *argv[])
   // https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
   std::random_device rd;  // Will be used to obtain a seed for the random number engine
   std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+
+  // Set user local locale (for thousand separators when printing integers)
+  std::locale locale("");
+  std::cout.imbue(locale);
 
   // Run params
   std::string sre = argc > 1 ? argv[1] : "0.0";
