@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
   {
     // codecs: https://gist.github.com/takuma7/44f9ecb028ff00e2132e
     std::cout << "Rendering animation of " << animParams->nFrames << " frames..." << std::endl;
-    cv::VideoWriter video("rendered.mp4", cv::VideoWriter::fourcc('a','v','c','1'), FPS, cv::Size(WND_WIDTH, WND_HEIGHT));
+    cv::VideoWriter video("rendered.mp4", cv::VideoWriter::fourcc('a', 'v', 'c', '1'), FPS, cv::Size(WND_WIDTH, WND_HEIGHT));
 
     auto frame = Animation::Frame{boundRect, c, resolution};
     for (unsigned int fi = 0; fi < animParams->nFrames; fi++)
@@ -114,12 +114,12 @@ int main(int argc, char *argv[])
         std::cout << YELLOW << "Decaying max iters to " << fractal->maxIters() << RESET << std::endl;
       }
 
-      #ifdef RENDER_FRAME_IMAGE
+#ifdef RENDER_FRAME_IMAGE
       fs::path root = fs::current_path();
       fs::path framePath = root / "frames/" / ("f-" + std::to_string(fi) + ".png");
       std::cout << "Writing frame to " << framePath << std::endl;
       cv::imwrite(framePath.string(), frameImage);
-      #endif
+#endif
       video.write(frameImage);
     }
 
