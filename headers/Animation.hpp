@@ -36,6 +36,14 @@ namespace Animation
     Frame next(const Frame &fr) const override;
   };
 
+  class AngularRotationStep : public FrameStep
+  {
+  public:
+    AngularRotationStep(const double &angle) : angle(angle){};
+    double angle; // in Radian
+    Frame next(const Frame &fr) const override;
+  };
+
   struct Params
   {
     Geometry::ComplexRect boundRect;

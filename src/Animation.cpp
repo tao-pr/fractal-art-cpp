@@ -28,4 +28,16 @@ namespace Animation
     auto c = fr.c + this->step;
     return Frame{fr.boundRect, c, fr.resolution};
   };
+
+  // https://matthew-brett.github.io/teaching/rotation_2d.html
+  Frame AngularRotationStep::next(const Frame &fr) const
+  {
+    // Rotational angle (delta)
+    double cosRot = cos(this->angle);
+    double sinRot = sin(this->angle);
+
+    // Rotate by angle
+    auto c = Z::Z(cosRot*fr.c.re - sinRot*fr.c.im, sinRot*fr.c.re + cosRot*fr.c.im);
+    return Frame{fr.boundRect, c, fr.resolution};
+  };
 };

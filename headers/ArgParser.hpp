@@ -145,6 +145,45 @@ namespace ArgParser
 
         return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
       }
+      else if (aniType == "rotate" && params.size() > 1)
+      {
+        // eg params = "angle=0.001"
+        auto step = std::make_shared<Animation::AngularRotationStep>(0.01745); // 1 degree
+
+        std::string pair;
+        while (std::getline(streamParams, pair, ','))
+        {
+          std::stringstream pairStream(pair);
+          std::string key, value;
+          if (std::getline(pairStream, key, '=') && std::getline(pairStream, value, '='))
+          {
+            std::cout << "extracted: " << key << " -> " << value << std::endl;
+            if (key == "angle")
+            {
+              step->angle = std::stof(value);
+            }
+            else if (key == "decayEvery")
+            {
+              decayEvery = std::stoi(value);
+            }
+            else if (key == "decay")
+            {
+              decayIters = std::stoi(value);
+            }
+            else if (key == "minIters")
+            {
+              minIters = std::stoi(value);
+            }
+            else
+            {
+              std::cerr << "Unknown key '" << key << "'" << std::endl;
+              throw new std::runtime_error("Unknown key");
+            }
+          }
+        };
+
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
+      }
     }
     else
     {
