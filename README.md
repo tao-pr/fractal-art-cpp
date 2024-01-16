@@ -126,6 +126,9 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 # Zoom-in animation example
 ./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488889,0.162963 zoom:120:ratio=0.9,decayEvery=5,decay=-20
 
+# Zoom-in animation example
+./make.sh && bin/julia -0.835 -0.2321 100 0.001 2 julia 0.555166,0.0971107 zoom:60:ratio=0.92,decayEvery=8,decay=-20
+
 # Translation animation example (real value walk)
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
 
