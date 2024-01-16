@@ -28,6 +28,7 @@ namespace Animation
     Frame next(const Frame &fr) const override;
   };
 
+  // Complex transition
   class ComplexPlaneStep : public FrameStep
   {
   public:
@@ -36,6 +37,7 @@ namespace Animation
     Frame next(const Frame &fr) const override;
   };
 
+  // Complex rotation
   class AngularRotationStep : public FrameStep
   {
   public:

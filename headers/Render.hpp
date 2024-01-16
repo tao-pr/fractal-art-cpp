@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <math.h>
+#include <iomanip>
 
 // https://github.com/oneapi-src/oneTBB/blob/master/examples/parallel_for_each/parallel_preorder/parallel_preorder.cpp
 #include "oneapi/tbb/parallel_for_each.h"
@@ -127,7 +128,10 @@ namespace Render
         auto boundRect = (Geometry::ComplexRect *)userdata;
         double re = boundRect->minRe() + (x * (boundRect->maxRe() - boundRect->minRe()) / WND_WIDTH);
         double im = boundRect->minIm() + (y * (boundRect->maxIm() - boundRect->minIm()) / WND_HEIGHT);
-        std::cout << "Mouse clicked at (" << re << ", " << im << ")" << std::endl;
+        std::cout << "Mouse clicked at (" 
+          << std::fixed << std::setprecision(9) << re 
+          << ", " 
+          << std::fixed << std::setprecision(9) << im << ")" << std::endl;
       }
     }
   };
