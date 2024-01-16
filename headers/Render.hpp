@@ -52,7 +52,6 @@ namespace Render
       // Paint pixel with convergence value
       const auto v = t.fractal->convergence(t.z, 0);
       const float ratio = (float)v / (float)t.fractal->maxIters();
-      const float highHalfRatio = min(0.25f, ratio - 0.25f) / 0.75f;
       const unsigned char b = floor(255.0f * (1.0f - ratio));
       const unsigned char g = 0;
       const unsigned char r = floor(255.0f * powf(ratio, exp(0.0f)));
