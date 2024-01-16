@@ -2,14 +2,14 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/tao-pr/julia-set-cpp/blob/main/LICENSE)
 
-A C++ implementation of Fractal art rendering.
+A C++ implementation of Fractal art rendering (PNG/MP4).
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
+- [How to Render](#how-to-render)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -68,7 +68,7 @@ brew install openh264
   ./make.sh && bin/julia 0 -0.75 50 0.0001
   ```
 
-## Usage
+## How to Render
 
 The executable accepts the following positional arguments
 
@@ -80,9 +80,9 @@ The executable accepts the following positional arguments
 
 See example of arguments in the next section. After run, it will write an output image to `fractal.png`.
 
-## Some good examples
+## Still images
 
-For still image
+Some examples of how to generate Julia set render as PNG.
 
 ```sh
 # Simple Julia (degree2)
@@ -112,6 +112,8 @@ For still image
 ./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012
 ```
 
+## Animation (render as mp4)
+
 For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
 
 ```sh
@@ -119,33 +121,40 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia -0.835 -0.2321 80 0.001 2 julia 0.54763,0.111592 zoom:120:0.99
 
 # Zoom-in animation example
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473683,0.18845 zoom:240:ratio=0.98,decayEvery=8,decay=-6
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.47367,0.188452 zoom:600:ratio=0.97,decayEvery=5,decay=-5
+
+# Zoom-in animation example
+./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488889,0.162963 zoom:120:ratio=0.9,decayEvery=5,decay=-20
+
+# Translation animation example (real value walk)
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
+
+# Translation animation example (imaginary walk)
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=0.001,decay=0
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=-0.001,decay=-5,decayEvery=10
 ```
 
 Rendering a sequence of Julia set visualisations takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
 
 ```
-Rendering frame #210
+Rendering frame #117
 Preparing parallel tasks...
-Submitted 8610312 parallel render tasks (3912x2201)
-Finished 8610312 parallel render tasks (3912x2201)
-Resized from 2201 x 3912 to 1920 x 1080
-bound = 0.0158077, res = 1.40832e-05
-Rendering frame #211
+Submitted 8610312 parallel render tasks (3912x2200)
+Finished 8610312 parallel render tasks (3912x2200)
+Resized from 3912 x 2200 to 1920 x 1080
+bound = 4.87265e-06, res = 3.98671e-09
+Rendering frame #118
 Preparing parallel tasks...
-Submitted 8610312 parallel render tasks (3912x2201)
-Finished 8610312 parallel render tasks (3912x2201)
-Resized from 2201 x 3912 to 1920 x 1080
-bound = 0.0154916, res = 1.38016e-05
-Rendering frame #212
+Submitted 8606400 parallel render tasks (3912x2201)
+Finished 8606400 parallel render tasks (3912x2201)
+Resized from 3912 x 2201 to 1920 x 1080
+bound = 4.38538e-06, res = 3.58804e-09
+Rendering frame #119
 Preparing parallel tasks...
-Submitted 8610312 parallel render tasks (3912x2201)
-Finished 8610312 parallel render tasks (3912x2201)
-Resized from 2201 x 3912 to 1920 x 1080
-bound = 0.0151818, res = 1.35256e-05
-Rendering frame #213
-Preparing parallel tasks...
-Submitted 8610312 parallel render tasks (3912x2201)
+Submitted 8610312 parallel render tasks (3912x2200)
+Finished 8610312 parallel render tasks (3912x2200)
+Resized from 3912 x 2200 to 1920 x 1080
+Press any key to exit..
 ```
 
 ## Samples

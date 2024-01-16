@@ -95,7 +95,15 @@ int main(int argc, char *argv[])
       auto frameImage = render->render(fractal, frame.boundRect, frame.resolution);
 
       if (fi < animParams->nFrames - 1)
+      {
         frame = animParams->frameStep->next(frame);
+        if (frame.c != c)
+        {
+          std::cout << "new z = [" << frame.c.re << ", " << frame.c.im << "]" << std::endl;
+          fractal->updateC(frame.c);
+          c = frame.c;
+        }
+      }
       else
         break;
 

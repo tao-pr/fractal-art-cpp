@@ -57,15 +57,16 @@ namespace ArgParser
       std::getline(ss, params, ':');
       auto streamParams = std::stringstream(params);
 
+      auto decayEvery = 25;
+      auto decayIters = -5;
+      auto minIters = 10;
+
       int numFrames = std::stoi(token);
       if (aniType == "zoom" && params.size() > 1)
       {
-        // eg params = "step=0.001,"
-        //    params = "step=0.001,foo=bar"
+        // eg params = "ratio=0.001"
+        //    params = "ratio=0.001,decayEvery=25,decay=-5,minIters=10"
         auto step = std::make_shared<Animation::ZoomStep>(0.92f);
-        auto decayEvery = 25;
-        auto decayIters = -5;
-        auto minIters = 10;
 
         std::string pair;
         while (std::getline(streamParams, pair, ','))
@@ -101,10 +102,48 @@ namespace ArgParser
 
         return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
       }
-      else if (aniType == "complex")
+      else if (aniType == "complex" && params.size() > 1)
       {
-        // taotodo:
-        throw new std::runtime_error("'Complex' animation type not implemented yet");
+        // eg params = "step=0.001"
+        auto step = std::make_shared<Animation::ComplexPlaneStep>(Z::Z(0.0001, 0.0));
+
+        std::string pair;
+        while (std::getline(streamParams, pair, ','))
+        {
+          std::stringstream pairStream(pair);
+          std::string key, value;
+          if (std::getline(pairStream, key, '=') && std::getline(pairStream, value, '='))
+          {
+            std::cout << "extracted: " << key << " -> " << value << std::endl;
+            if (key == "stepRe")
+            {
+              step->step.re = std::stof(value);
+            }
+            else if (key == "stepIm")
+            {
+              step->step.im = std::stof(value);
+            }
+            else if (key == "decayEvery")
+            {
+              decayEvery = std::stoi(value);
+            }
+            else if (key == "decay")
+            {
+              decayIters = std::stoi(value);
+            }
+            else if (key == "minIters")
+            {
+              minIters = std::stoi(value);
+            }
+            else
+            {
+              std::cerr << "Unknown key '" << key << "'" << std::endl;
+              throw new std::runtime_error("Unknown key");
+            }
+          }
+        };
+
+        return Animation::Params{boundRect, step, numFrames, decayEvery, decayIters, minIters};
       }
     }
     else

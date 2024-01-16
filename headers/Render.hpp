@@ -104,7 +104,7 @@ namespace Render
       {
         cv::resize(rendered, resized, cv::Size(WND_WIDTH, WND_HEIGHT));
         cv::imshow("Fractal", resized);
-        std::cout << "Resized from " << rendered.size << " to " << WND_WIDTH << " x " << WND_HEIGHT << std::endl;
+        std::cout << "Resized from " << rendered.size().width << " x " << rendered.size().height << " to " << WND_WIDTH << " x " << WND_HEIGHT << std::endl;
       }
       else
       {

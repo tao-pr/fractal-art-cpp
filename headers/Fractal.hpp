@@ -25,6 +25,11 @@ namespace Fractal
       this->nMaxIters = max(minIters, this->nMaxIters - decaySize);
     };
 
+    void updateC(Z::Z& c_)
+    {
+      this->c = c_;
+    };
+
     // Supposed to be atomic and thread-safe
     virtual int convergence(const Z::Z &z, int nIter = 0) const = 0;
   };
