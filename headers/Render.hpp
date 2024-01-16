@@ -64,7 +64,8 @@ namespace Render
     Mat render(
         std::shared_ptr<Fractal::Fractal> fractal,
         const Geometry::ComplexRect &boundRect,
-        const double &resolution = 0.01)
+        const double &resolution = 0.01,
+        bool writeToPNG = true)
     {
       std::vector<RenderTask> tasks;
 
@@ -92,7 +93,7 @@ namespace Render
       // Display plot
       auto rendered = cv::Mat(height, width, CV_8UC3, pixels);
       cv::namedWindow("Fractal");
-      return display(rendered, boundRect);
+      return display(rendered, boundRect, writeToPNG);
     }
 
     Mat display(cv::Mat &rendered, const Geometry::ComplexRect &boundRect, bool writeToPNG = true)

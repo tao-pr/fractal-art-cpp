@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
     for (unsigned int fi = 0; fi < animParams->nFrames; fi++)
     {
       std::cout << CYAN << "Rendering frame #" << fi << RESET << std::endl;
-      auto frameImage = render->render(fractal, frame.boundRect, frame.resolution);
+      auto frameImage = render->render(fractal, frame.boundRect, frame.resolution, false);
 
       if (fi < animParams->nFrames - 1)
       {
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
   else
   {
     std::cout << "Rendering still image..." << std::endl;
-    render->render(fractal, boundRect, resolution);
+    render->render(fractal, boundRect, resolution, true);
   }
 
   std::cout << "Press any key to exit..." << std::endl;
