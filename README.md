@@ -133,6 +133,9 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488886855,0.162962134 zoom:216:ratio=0.9,decayEvery=3,decay=-20,maxIters=1200
 # taotodo: to re-render
 
+# Zoom-in animation example #4
+./make.sh && bin/julia 0.162 1.04 14 0.001 1.8 julia -0.019280780364,-0.474818652422 zoom:20:ratio=0.9
+
 
 # Translation animation example #1 (real value walk)
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
@@ -143,6 +146,12 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 # Rotation animation example #1
 ./make.sh && bin/julia -0.4 0.6 250 0.001 1 julia 0,0 rotate:30:decay=0,angle=0.001
+
+# Rotation animation example #2
+./make.sh && bin/julia 0.162 1.04 14 0.001 1.8 julia -0.019280780364,-0.474818652422 rotate:40:decay=0,angle=0.15707963268
+
+# Rotation animation example #3
+./make.sh && bin/julia -1.476 0 25 0.001 1.8 julia 0,0 rotate:32:angle=0.2094395102,decay=5,decayEvery=4,minIters=8
 ```
 
 Rendering a sequence of Julia set visualisations takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
