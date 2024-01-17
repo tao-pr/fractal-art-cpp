@@ -135,8 +135,6 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 
 # Translation animation example #1 (real value walk)
-#
-#
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
 
 # Translation animation example #2 (imaginary walk)
