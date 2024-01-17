@@ -124,10 +124,10 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 # taotodo need a new param C (duplicate with #3)
 
 # Zoom-in animation example #2
-#
-#
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.47367,0.188452 zoom:600:ratio=0.97,decayEvery=5,decay=-5
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.47367,0.188452 zoom:120:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
+#   160 frames (7s videos)
+#   Taking 
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:160:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:160:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
 #   216 frames (9s video)

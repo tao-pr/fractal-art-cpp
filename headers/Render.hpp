@@ -53,8 +53,8 @@ namespace Render
       // Paint pixel with convergence value
       const auto v = t.fractal->convergence(t.z, 0);
       const float ratio = (float)v / (float)t.fractal->maxIters();
-      const unsigned char b = floor(255.0f * (1.0f - ratio));
-      const unsigned char g = 0;
+      const unsigned char b = floor(powf(ratio, 2.0f) * 128);
+      const unsigned char g = (ratio > 0.75) ? floor(200 * (ratio - 0.75) / 0.25) : 0;
       const unsigned char r = floor(255.0f * powf(ratio, exp(0.0f)));
 
       *(t.pixel) = b;
@@ -128,10 +128,10 @@ namespace Render
         auto boundRect = (Geometry::ComplexRect *)userdata;
         double re = boundRect->minRe() + (x * (boundRect->maxRe() - boundRect->minRe()) / WND_WIDTH);
         double im = boundRect->minIm() + (y * (boundRect->maxIm() - boundRect->minIm()) / WND_HEIGHT);
-        std::cout << "Mouse clicked at (" 
-          << std::fixed << std::setprecision(9) << re 
-          << ", " 
-          << std::fixed << std::setprecision(9) << im << ")" << std::endl;
+        std::cout << "Mouse clicked at ("
+                  << std::fixed << std::setprecision(9) << re
+                  << ", "
+                  << std::fixed << std::setprecision(9) << im << ")" << std::endl;
       }
     }
   };
