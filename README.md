@@ -115,7 +115,7 @@ Some examples of how to generate Julia set render as PNG.
 
 ## Animation (render as mp4)
 
-For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
+For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}". Note that for zooming, the program will always zoom into the `{centre}` coordinate of the render.
 
 ```sh
 # Zoom-in animation example #1
@@ -128,13 +128,16 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:192:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
-#   216 frames (9s video)
-#   Taking 21 minutes to render on Apple M1
-./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488886855,0.162962134 zoom:216:ratio=0.9,decayEvery=3,decay=-20,maxIters=1200
-# taotodo: to re-render
+./make.sh && bin/julia 0.162 1.04 14 0.001 1.8 julia -0.019280780364,-0.474818652422 zoom:20:ratio=0.9
+# taotodo - NOT RE-RENDERED YET
 
 # Zoom-in animation example #4
-./make.sh && bin/julia 0.162 1.04 14 0.001 1.8 julia -0.019280780364,-0.474818652422 zoom:20:ratio=0.9
+# This animation render is quite a CPU-heavy one, as most of its visible coordinates 
+# will not escape early.
+# 
+./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497222225927,-0.098611111111 zoom:64:ratio=0.9,decay=-20,decayEvery=3,maxIters=1500
+# taotodo - RENDERING
+./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497931807225,-0.098794133768 zoom:120:ratio=0.92,decay=-24,decayEvery=2,maxIters=1500
 
 
 # Translation animation example #1 (real value walk)
@@ -154,7 +157,7 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia -1.476 0 25 0.001 1.8 julia 0,0 rotate:32:angle=0.2094395102,decay=5,decayEvery=4,minIters=8
 ```
 
-Rendering a sequence of Julia set visualisations takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
+Rendering a sequence of Julia set zoomings takes substantial amount of work for CPU. An ARM-powered laptop (Macbook M1) could generate some amount of heat with just 10 seconds of video render (240 frames).
 
 ```
 Rendering frame #117
@@ -179,7 +182,7 @@ Press any key to exit..
 
 ## Samples
 
-See sample renders in `/samples` dir.
+See sample rendered images in `/samples` dir.
 
 ![sample1](samples/fractal-1.png)
 
