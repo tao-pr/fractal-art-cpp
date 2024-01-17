@@ -19,9 +19,10 @@ This project is a C++ implementation of Julia Set and other fractal seet renderi
 
 ## Features
 
-- Generate high-resolution Julia Set images
-- Customize the parameters of the Julia Set
-- Save the rendered images to disk
+- Generate high-resolution Julia Set images (PNG)
+- Generate high-resolution Julia Set animations, eg. Zoom or rotation (AC1/MP4)
+- Support multiple types of Julia sets
+- Customisable Julia set parameters
 
 ## Getting Started
 
@@ -89,10 +90,10 @@ Some examples of how to generate Julia set render as PNG.
 ./make.sh && bin/julia 0.285 0.01 200 0.001
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1 julia 0.4784,0.1832
 ./make.sh && bin/julia -0.4 0.6 200 0.001
-./make.sh && bin/julia 0.285 0 200 0.001
-./make.sh && bin/julia -0.70176 0.3842 100 0.001
+./make.sh && bin/julia 0.285 0 60 0.001
+./make.sh && bin/julia -0.70176 0.3842 60 0.001
 ./make.sh && bin/julia 0.285 0.01 200 0.001
-./make.sh && bin/julia -0.835 -0.2321 100 0.001 1.2
+./make.sh && bin/julia -0.835 -0.2321 50 0.001 1.2
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001
 ./make.sh && bin/julia -0.7269 0.1889 500 0.001 1.5
 ./make.sh && bin/julia -0.3905407802 -0.5867879073 150 0.001 # Siegel disks
@@ -101,7 +102,7 @@ Some examples of how to generate Julia set render as PNG.
 ./make.sh && bin/julia 0 1 30 0.001 2 # Dendritic
 
 # Degree4 Julia
-./make.sh && bin/julia 0.6 0.55 100 0.001 0.99 degree4
+./make.sh && bin/julia 0.6 0.55 70 0.001 0.99 degree4
 ./make.sh && bin/julia -2 1 10 0.001 1.5 degree4
 ./make.sh && bin/julia 0 1 15 0.001 1.5 degree4
 
@@ -109,7 +110,7 @@ Some examples of how to generate Julia set render as PNG.
 ./make.sh && bin/julia 0.6 0.55 10 0.001 1.2 complex
 ./make.sh && bin/julia -0.3905407802 -0.5867879073 30 0.001 1 Complex
 ./make.sh && bin/julia -2 1 10 0.001 1.5 complex
-./make.sh && bin/julia 0 1 15 0.001 1.5 complex 0.006,-0.012
+./make.sh && bin/julia 0 1 8 0.001 1.5 complex 0.006,-0.012
 ```
 
 ## Animation (render as mp4)
@@ -118,26 +119,20 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 ```sh
 # Zoom-in animation example #1
-#
-#
-./make.sh && bin/julia -0.835 -0.2321 80 0.001 2 julia 0.54763,0.111592 zoom:120:0.99
-# taotodo need a new param C (duplicate with #3)
+#   288 frames (12s video)
+#   Taking 13 minutes to render on Apple M1
+./make.sh && bin/julia -0.835 -0.2321 50 0.0016 2 julia 0.551982975934,0.103081008008 zoom:288:ratio=0.92,decayEvery=8,decay=-15,maxIters=300
 
 # Zoom-in animation example #2
-#   160 frames (7s videos)
-#   Taking 
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:160:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:160:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
+#   192 frames (8s videos)
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:192:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
 #   216 frames (9s video)
 #   Taking 21 minutes to render on Apple M1
 ./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488886855,0.162962134 zoom:216:ratio=0.9,decayEvery=3,decay=-20,maxIters=1200
+# taotodo: to re-render
 
-# Zoom-in animation example #4
-#   288 frames (12s video)
-#   Taking 13 minutes to render on Apple M1
-./make.sh && bin/julia -0.835 -0.2321 50 0.0016 2 julia 0.551982976,0.103081008 zoom:288:ratio=0.92,decayEvery=8,decay=-15,maxIters=300
 
 # Translation animation example #1 (real value walk)
 #
@@ -145,8 +140,6 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
 
 # Translation animation example #2 (imaginary walk)
-#
-#
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=0.001,decay=0
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=-0.001,decay=-5,decayEvery=10
 
