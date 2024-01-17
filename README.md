@@ -128,9 +128,9 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:192:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
-#   250 frames (11s video)
-#   Taking 8 minutes to render on Apple M1
-./make.sh && bin/julia -0.3905407802 -0.5867879073 20 0.001 1.3 complex 0.021882444986,0.753229532906 zoom:250:ratio=0.92,decay=-2,decayEvery=6,maxIters=800
+#   290 frames (12s video)
+#   Taking 13 minutes to render on Apple M1
+./make.sh && bin/julia -0.3905407802 -0.5867879073 20 0.001 1.3 complex 0.021882444987,0.753229532908 zoom:290:ratio=0.92,decay=-2,decayEvery=6,maxIters=800
 
 # Zoom-in animation example #4
 # This animation render is quite a CPU-heavy one, as most of its visible coordinates 
