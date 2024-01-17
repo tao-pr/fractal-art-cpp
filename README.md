@@ -117,26 +117,40 @@ Some examples of how to generate Julia set render as PNG.
 For animation. The format of the params are "{animationType}:{numFrames}:{params=value},{params=value}"
 
 ```sh
-# Zoom-in animation example
+# Zoom-in animation example #1
+#
+#
 ./make.sh && bin/julia -0.835 -0.2321 80 0.001 2 julia 0.54763,0.111592 zoom:120:0.99
+# taotodo need a new param C (duplicate with #3)
 
-# Zoom-in animation example
+# Zoom-in animation example #2
+#
+#
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.47367,0.188452 zoom:600:ratio=0.97,decayEvery=5,decay=-5
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.47367,0.188452 zoom:120:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
-# Zoom-in animation example
-./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488889,0.162963 zoom:120:ratio=0.9,decayEvery=5,decay=-20
+# Zoom-in animation example #3
+#   216 frames (9s video)
+#   Taking 21 minutes to render on Apple M1
+./make.sh && bin/julia 0.28 0.008 200 0.001 1.1 julia 0.488886855,0.162962134 zoom:216:ratio=0.9,decayEvery=3,decay=-20,maxIters=1200
 
-# Zoom-in animation example
-./make.sh && bin/julia -0.835 -0.2321 100 0.001 2 julia 0.551983,0.103081 zoom:160:ratio=0.92,decayEvery=10,decay=-15
+# Zoom-in animation example #4
+#   288 frames (12s video)
+#   Taking 13 minutes to render on Apple M1
+./make.sh && bin/julia -0.835 -0.2321 50 0.0016 2 julia 0.551982976,0.103081008 zoom:288:ratio=0.92,decayEvery=8,decay=-15,maxIters=300
 
-# Translation animation example (real value walk)
+# Translation animation example #1 (real value walk)
+#
+#
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0.0002,decay=0
 
-# Translation animation example (imaginary walk)
+# Translation animation example #2 (imaginary walk)
+#
+#
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=0.001,decay=0
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.4784,0.1832 complex:25:stepRe=0,stepIm=-0.001,decay=-5,decayEvery=10
 
-# Rotation animation example
+# Rotation animation example #1
 ./make.sh && bin/julia -0.4 0.6 250 0.001 1 julia 0,0 rotate:30:decay=0,angle=0.001
 ```
 
@@ -171,7 +185,7 @@ See sample renders in `/samples` dir.
 
 ![sample1](samples/fractal-2.png)
 
-![sample1](samples/fractal-3.png)
+![sample1](samples/fractal-10.png)
 
 ![sample1](samples/fractal-4.png)
 
