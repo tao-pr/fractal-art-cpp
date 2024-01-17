@@ -108,7 +108,7 @@ Some examples of how to generate Julia set render as PNG.
 
 # Complex Julia
 ./make.sh && bin/julia 0.6 0.55 10 0.001 1.2 complex
-./make.sh && bin/julia -0.3905407802 -0.5867879073 30 0.001 1 Complex
+./make.sh && bin/julia -0.3905407802 -0.5867879073 30 0.001 1 complex
 ./make.sh && bin/julia -2 1 10 0.001 1.5 complex
 ./make.sh && bin/julia 0 1 8 0.001 1.5 complex 0.006,-0.012
 ```
@@ -128,15 +128,14 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 ./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:192:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
-./make.sh && bin/julia 0.162 1.04 14 0.001 1.8 julia -0.019280780364,-0.474818652422 zoom:20:ratio=0.9
-# taotodo - NOT RE-RENDERED YET
+#   250 frames (11s video)
+#   Taking 8 minutes to render on Apple M1
+./make.sh && bin/julia -0.3905407802 -0.5867879073 20 0.001 1.3 complex 0.021882444986,0.753229532906 zoom:250:ratio=0.92,decay=-2,decayEvery=6,maxIters=800
 
 # Zoom-in animation example #4
 # This animation render is quite a CPU-heavy one, as most of its visible coordinates 
 # will not escape early.
 # 
-./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497222225927,-0.098611111111 zoom:64:ratio=0.9,decay=-20,decayEvery=3,maxIters=1500
-# taotodo - RENDERING
 ./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497931807225,-0.098794133768 zoom:120:ratio=0.92,decay=-24,decayEvery=2,maxIters=1500
 
 
