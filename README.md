@@ -187,9 +187,9 @@ See sample rendered images in `/samples` dir.
 
 ![sample1](samples/fractal-1.png)
 
-![sample1](samples/fractal-2.png)
+![sample1](samples/fractal-7.png)
 
-![sample1](samples/fractal-10.png)
+![sample1](samples/fractal-9.png)
 
 ![sample1](samples/fractal-4.png)
 
