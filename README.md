@@ -125,8 +125,9 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 
 # Zoom-in animation example #2
-#   192 frames (8s videos)
-./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669791,0.188451676 zoom:192:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
+#   280 frames (12s videos)
+#   Taking 37 minutes to render on Apple M1
+./make.sh && bin/julia 0.285 0.01 200 0.001 1.1 julia 0.473669790468,0.188451675429 zoom:280:ratio=0.92,decayEvery=3,decay=-8,maxIters=1000
 
 # Zoom-in animation example #3
 #   290 frames (12s video)
@@ -139,6 +140,10 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 #   210 frames (9s video)
 #   Taking 47 minutes to render on Apple M1
 ./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497932052533,-0.098794214417 zoom:210:ratio=0.94,decay=-24,decayEvery=2,maxIters=3500
+
+# Zoom-in animation example #5
+# 
+./make.sh && bin/julia -0.835 -0.2321 60 0.001 1.2 julia 0.092446006895,-0.284429808957 zoom:276:ratio=0.94,decay=-2,decayEvery=3,maxIters=960
 
 
 # Translation animation example #1 (real value walk)
