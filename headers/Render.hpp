@@ -129,9 +129,9 @@ namespace Render
         double re = boundRect->minRe() + (x * (boundRect->maxRe() - boundRect->minRe()) / WND_WIDTH);
         double im = boundRect->minIm() + (y * (boundRect->maxIm() - boundRect->minIm()) / WND_HEIGHT);
         std::cout << "Mouse clicked at ("
-                  << std::fixed << std::setprecision(12) << re
+                  << std::fixed << std::setprecision(15) << re
                   << ", "
-                  << std::fixed << std::setprecision(12) << im << ")" << std::endl;
+                  << std::fixed << std::setprecision(15) << im << ")" << std::endl;
       }
     }
   };

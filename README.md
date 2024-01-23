@@ -119,9 +119,9 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 
 ```sh
 # Zoom-in animation example #1
-#   300 frames (12s video)
+#   360 frames (15s video)
 #   Taking 13 minutes to render on Apple M1
-./make.sh && bin/julia -0.835 -0.2321 50 0.0016 2 julia 0.551982975934,0.103081008008 zoom:300:ratio=0.92,decayEvery=5,decay=-5,maxIters=900
+./make.sh && bin/julia -0.835 -0.2321 50 0.0016 2 julia 0.551982975934,0.551982975934 zoom:380:ratio=0.92,decayEvery=5,decay=-5,maxIters=900 
 
 
 # Zoom-in animation example #2
@@ -139,11 +139,11 @@ For animation. The format of the params are "{animationType}:{numFrames}:{params
 # will not escape early. It also produces significantly the largest output file.
 #   210 frames (9s video)
 #   Taking 47 minutes to render on Apple M1
-./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497932052533,-0.098794214417 zoom:210:ratio=0.94,decay=-24,decayEvery=2,maxIters=3500
+./make.sh && bin/julia -0.7269 0.1889 500 0.0016 1.5 julia 0.497930476513736,-0.098793300393041 zoom:240:ratio=0.94,decay=-24,decayEvery=2,maxIters=3500
 
 # Zoom-in animation example #5
-# 
-./make.sh && bin/julia -0.835 -0.2321 60 0.001 1.2 julia 0.092446006895,-0.284429808957 zoom:276:ratio=0.94,decay=-2,decayEvery=3,maxIters=960
+#
+./make.sh && bin/julia -0.835 -0.2321 60 0.001 1.2 julia 0.092446006940281,-0.284429809138125 zoom:320:ratio=0.94,decay=-2,decayEvery=3,maxIters=960
 
 
 # Translation animation example #1 (real value walk)
